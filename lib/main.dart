@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/home.dart';
+import 'package:model_house/screens/interest.dart';
 import 'package:model_house/screens/principal_view.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PrincipalView(),
+      home: const Interest(),
       theme: ThemeData(
           primaryColor: Color(0XFF1C1C1C),
           accentColor: Color(0XFF161A1D),
