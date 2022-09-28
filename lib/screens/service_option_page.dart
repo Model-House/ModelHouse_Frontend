@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/models/option.dart';
+import 'package:model_house/models/service-op.dart';
+import 'package:model_house/services/service_service.dart';
 
 class ServiceOptionPage extends StatefulWidget {
   const ServiceOptionPage({super.key});
@@ -37,80 +39,100 @@ class ServiceOptions extends StatefulWidget {
 }
 
 class _ServiceOptionsState extends State<ServiceOptions> {
-  List<Option> areas = [
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Installation',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Maintenance',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Painting',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Plumbing',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Repair',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Electrical',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Assembly',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff74806D),
-      ),
-      'Safety & Mobility',
-      false,
-    ),
-  ];
+  List<ServiceOp>? posts;
+  var isLoaded = false;
+  @override
+  void initState() {
+    super.initState();
+
+    //fetch data from API
+    getData();
+  }
+
+  getData() async {
+    posts = await ServiceService().getPosts();
+    if (posts != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    } else {
+      throw Exception('no cargo del todo');
+    }
+  }
+  // List<Option> areas = [
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Installation',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Maintenance',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Painting',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Plumbing',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Repair',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Electrical',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Assembly',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff74806D),
+  //     ),
+  //     'Safety & Mobility',
+  //     false,
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +143,8 @@ class _ServiceOptionsState extends State<ServiceOptions> {
       itemBuilder: (context, index) {
         return Center(
           child: Card(
-            color: !areas[index].check ? Colors.white : const Color(0xff74806D),
+            color:
+                !posts![index].check ? Colors.white : const Color(0xff74806D),
             elevation: 0,
             shape: const RoundedRectangleBorder(
               side: BorderSide(
@@ -134,9 +157,10 @@ class _ServiceOptionsState extends State<ServiceOptions> {
               splashColor: const Color(0xff74806D).withAlpha(50),
               onTap: () {
                 setState(() {
-                  areas[index].check = !areas[index].check;
+                  posts![index].check = !posts![index].check;
+                  ServiceService().updatePosts(index, posts![index].check);
                 });
-                debugPrint('${areas[index].check}');
+                debugPrint('${posts![index].check}');
               },
               child: SizedBox(
                 width: 200,
@@ -145,20 +169,24 @@ class _ServiceOptionsState extends State<ServiceOptions> {
                   children: [
                     Ink(
                       decoration: ShapeDecoration(
-                        color: !areas[index].check
+                        color: !posts![index].check
                             ? const Color.fromRGBO(250, 244, 222, 0.89)
                             : Colors.black,
                         shape: const CircleBorder(),
                       ),
-                      child: SizedBox(
+                      child: const SizedBox(
                         height: 110,
-                        child: areas[index].icon,
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 70,
+                          color: Color(0xff74806D),
+                        ),
                       ),
                     ),
                     Text(
-                      areas[index].name,
+                      posts![index].name,
                       style: TextStyle(
-                        fontWeight: !areas[index].check
+                        fontWeight: !posts![index].check
                             ? FontWeight.w600
                             : FontWeight.w800,
                       ),
@@ -170,7 +198,7 @@ class _ServiceOptionsState extends State<ServiceOptions> {
           ),
         );
       },
-      itemCount: areas.length,
+      itemCount: posts!.length,
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-List<Post> postFromJson(String str) =>
-    List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
+List<ServiceOp> postFromJson(String str) =>
+    List<ServiceOp>.from(json.decode(str).map((x) => ServiceOp.fromJson(x)));
 
-String postToJson(List<Post> data) =>
+String postToJson(List<ServiceOp> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Post {
-  Post({
+class ServiceOp {
+  ServiceOp({
     required this.id,
     required this.name,
     required this.check,
@@ -16,7 +16,7 @@ class Post {
   String name;
   bool check;
 
-  factory Post.fromJson(Map<String, dynamic> json) => Post(
+  factory ServiceOp.fromJson(Map<String, dynamic> json) => ServiceOp(
         id: json["id"],
         name: json["name"],
         check: json["check"],

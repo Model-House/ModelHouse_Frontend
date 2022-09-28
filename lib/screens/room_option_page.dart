@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:model_house/models/option.dart';
+import 'package:model_house/models/room.dart';
+import 'package:model_house/services/room_service.dart';
 
 class RoomOptionPage extends StatefulWidget {
   const RoomOptionPage({super.key});
@@ -37,89 +38,109 @@ class RoomOptions extends StatefulWidget {
 }
 
 class _RoomOptionsState extends State<RoomOptions> {
-  List<Option> areas = [
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Attic',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Deck & Patio',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Bathroom',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Garage',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Bedroom',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Office',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Basement',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Kitchen',
-      false,
-    ),
-    Option(
-      const Icon(
-        Icons.arrow_back,
-        size: 70,
-        color: Color(0xff457DE9),
-      ),
-      'Living Room',
-      false,
-    ),
-  ];
+  List<Room>? posts;
+  var isLoaded = false;
+  @override
+  void initState() {
+    super.initState();
+
+    //fetch data from API
+    getData();
+  }
+
+  getData() async {
+    posts = await RoomService().getPosts();
+    if (posts != null) {
+      setState(() {
+        isLoaded = true;
+      });
+    } else {
+      throw Exception('no cargo del todo');
+    }
+  }
+  // List<Option> areas = [
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Attic',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Deck & Patio',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Bathroom',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Garage',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Bedroom',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Office',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Basement',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Kitchen',
+  //     false,
+  //   ),
+  //   Option(
+  //     const Icon(
+  //       Icons.arrow_back,
+  //       size: 70,
+  //       color: Color(0xff457DE9),
+  //     ),
+  //     'Living Room',
+  //     false,
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +151,8 @@ class _RoomOptionsState extends State<RoomOptions> {
       itemBuilder: (context, index) {
         return Center(
           child: Card(
-            color: !areas[index].check ? Colors.white : const Color(0xff457DE9),
+            color:
+                !posts![index].check ? Colors.white : const Color(0xff457DE9),
             elevation: 0,
             shape: const RoundedRectangleBorder(
               side: BorderSide(
@@ -143,9 +165,10 @@ class _RoomOptionsState extends State<RoomOptions> {
               splashColor: const Color(0xff457DE9).withAlpha(50),
               onTap: () {
                 setState(() {
-                  areas[index].check = !areas[index].check;
+                  posts![index].check = !posts![index].check;
+                  RoomService().updatePosts(index, posts![index].check);
                 });
-                debugPrint('${areas[index].check}');
+                debugPrint('${posts![index].check}');
               },
               child: SizedBox(
                 width: 200,
@@ -154,20 +177,24 @@ class _RoomOptionsState extends State<RoomOptions> {
                   children: [
                     Ink(
                       decoration: ShapeDecoration(
-                        color: !areas[index].check
+                        color: !posts![index].check
                             ? const Color.fromRGBO(250, 244, 222, 0.89)
                             : Colors.black,
                         shape: const CircleBorder(),
                       ),
-                      child: SizedBox(
+                      child: const SizedBox(
                         height: 110,
-                        child: areas[index].icon,
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 70,
+                          color: Color(0xff457DE9),
+                        ),
                       ),
                     ),
                     Text(
-                      areas[index].name,
+                      posts![index].name,
                       style: TextStyle(
-                        fontWeight: !areas[index].check
+                        fontWeight: !posts![index].check
                             ? FontWeight.w600
                             : FontWeight.w800,
                       ),
@@ -179,7 +206,7 @@ class _RoomOptionsState extends State<RoomOptions> {
           ),
         );
       },
-      itemCount: areas.length,
+      itemCount: posts!.length,
     );
   }
 }
