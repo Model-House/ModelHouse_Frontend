@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:model_house/screens/home.dart';
 import 'package:model_house/screens/interest.dart';
 import 'package:model_house/screens/principal_view.dart';
+import 'package:model_house/screens/sessionoptions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Interest(),
+      home: const SessionOptions(),
       theme: ThemeData(
           primaryColor: Color(0XFF1C1C1C),
           accentColor: Color(0XFF161A1D),

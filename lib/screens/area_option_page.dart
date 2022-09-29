@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/models/option.dart';
-import 'package:model_house/models/post.dart';
-import 'package:model_house/services/remote_service.dart';
+import 'package:model_house/models/area.dart';
+import 'package:model_house/services/area_service.dart';
 
 class AreaOptionPage extends StatefulWidget {
   const AreaOptionPage({super.key});
@@ -17,7 +17,18 @@ class _AreaOptionPageState extends State<AreaOptionPage> {
       backgroundColor: const Color(0xff1C1C1C),
       appBar: AppBar(
         backgroundColor: const Color(0xff1C1C1C),
-        title: const Text('By Area'),
+        title: RichText(
+          text: const TextSpan(children: [
+            TextSpan(
+                text: 'By ',
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+            TextSpan(
+                text: 'A', style: TextStyle(color: Color(0xffE94545), fontSize: 20)),
+            TextSpan(
+                text: 'rea',
+                style: TextStyle(color: Colors.white, fontSize: 20))
+          ]),
+        ),
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -39,9 +50,8 @@ class AreaOptions extends StatefulWidget {
 }
 
 class _AreaOptionsState extends State<AreaOptions> {
-  List<Post>? posts;
+  List<Area>? posts = [];
   var isLoaded = false;
-
   @override
   void initState() {
     super.initState();
@@ -51,11 +61,13 @@ class _AreaOptionsState extends State<AreaOptions> {
   }
 
   getData() async {
-    posts = await RemoteService().getPosts();
+    posts = await AreaService().getPosts();
     if (posts != null) {
       setState(() {
         isLoaded = true;
       });
+    } else {
+      throw Exception('no cargo del todo');
     }
   }
 
@@ -144,7 +156,7 @@ class _AreaOptionsState extends State<AreaOptions> {
               onTap: () {
                 setState(() {
                   posts![index].check = !posts![index].check;
-                  // RemoteService().updatePosts(index + 1, !posts![index].check);
+                  AreaService().updatePosts(index, posts![index].check);
                 });
                 debugPrint('${posts![index].check}');
               },
@@ -185,7 +197,7 @@ class _AreaOptionsState extends State<AreaOptions> {
           ),
         );
       },
-      itemCount: posts?.length,
+      itemCount: posts!.length,
     );
   }
 }
