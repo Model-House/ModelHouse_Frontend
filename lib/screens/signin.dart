@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/interest.dart';
+import 'package:model_house/screens/signup.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -103,11 +104,20 @@ Widget body() {
   Container noAccount() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
-      child: Row(children: const [
+      child: Row(children: [
       Text("Don't have an account? ",
       style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
-      Text('Sign up',
-      style: TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),),
+      GestureDetector(
+      onTap: () {Navigator.of(context).push(
+              MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const SignUp();
+              },
+            ),
+          );},
+          child: Text('Sign up',
+          style: TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),),
+      ),
     ])
     );
   }

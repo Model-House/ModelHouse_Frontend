@@ -23,7 +23,7 @@ class _AreaOptionPageState extends State<AreaOptionPage> {
                 text: 'By ',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             TextSpan(
-                text: 'A', style: TextStyle(color: Colors.red, fontSize: 20)),
+                text: 'A', style: TextStyle(color: Color(0xffE94545), fontSize: 20)),
             TextSpan(
                 text: 'rea',
                 style: TextStyle(color: Colors.white, fontSize: 20))
@@ -50,7 +50,7 @@ class AreaOptions extends StatefulWidget {
 }
 
 class _AreaOptionsState extends State<AreaOptions> {
-  List<Area>? posts;
+  List<Area>? posts = [];
   var isLoaded = false;
   @override
   void initState() {

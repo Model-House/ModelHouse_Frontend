@@ -16,7 +16,18 @@ class _RoomOptionPageState extends State<RoomOptionPage> {
       backgroundColor: const Color(0xff1C1C1C),
       appBar: AppBar(
         backgroundColor: const Color(0xff1C1C1C),
-        title: const Text('By Room'),
+        title: RichText(
+          text: const TextSpan(children: [
+            TextSpan(
+                text: 'By ',
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+            TextSpan(
+                text: 'R', style: TextStyle(color: Color(0xff457DE9), fontSize: 20)),
+            TextSpan(
+                text: 'oom',
+                style: TextStyle(color: Colors.white, fontSize: 20))
+          ]),
+        ),
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -38,7 +49,7 @@ class RoomOptions extends StatefulWidget {
 }
 
 class _RoomOptionsState extends State<RoomOptions> {
-  List<Room>? posts;
+  List<Room>? posts = [];
   var isLoaded = false;
   @override
   void initState() {

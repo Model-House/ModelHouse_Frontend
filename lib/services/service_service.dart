@@ -8,7 +8,7 @@ class ServiceService {
   var client = http.Client();
 
   Future<List<ServiceOp>?> getPosts() async {
-    var uri = Uri.parse('${url}areas');
+    var uri = Uri.parse('${url}services');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -18,7 +18,7 @@ class ServiceService {
 
   Future<ServiceOp> updatePosts(int id, bool check) async {
     final response = await http.put(
-      Uri.parse('${url}areas/${id + 1}'),
+      Uri.parse('${url}services/${id + 1}'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         "Accept": "application/json",
