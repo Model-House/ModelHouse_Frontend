@@ -17,7 +17,18 @@ class _ServiceOptionPageState extends State<ServiceOptionPage> {
       backgroundColor: const Color(0xff1C1C1C),
       appBar: AppBar(
         backgroundColor: const Color(0xff1C1C1C),
-        title: const Text('By Service'),
+        title: RichText(
+          text: const TextSpan(children: [
+            TextSpan(
+                text: 'By ',
+                style: TextStyle(color: Colors.white, fontSize: 20)),
+            TextSpan(
+                text: 'S', style: TextStyle(color: Color(0xff74806D), fontSize: 20)),
+            TextSpan(
+                text: 'ervice',
+                style: TextStyle(color: Colors.white, fontSize: 20))
+          ]),
+        ),
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -39,7 +50,7 @@ class ServiceOptions extends StatefulWidget {
 }
 
 class _ServiceOptionsState extends State<ServiceOptions> {
-  List<ServiceOp>? posts;
+  List<ServiceOp>? posts = [];
   var isLoaded = false;
   @override
   void initState() {

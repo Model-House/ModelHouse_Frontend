@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/signup.dart';
 
 class SignUpChoice extends StatefulWidget {
@@ -96,11 +97,21 @@ Widget body() {
   Container haveAccount() {
     return Container( 
       margin: EdgeInsets.symmetric(horizontal: 20),
-    child: Row(children: const [
+    child: Row(children: [
       Text('Already have an account? ',
       style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold)),
-      Text('Sign in',
+      GestureDetector(
+      onTap: () {Navigator.of(context).push(
+              MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const SignIn();
+              },
+            ),
+          );},
+      child: Text('Sign in',
       style: TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),),
+      ),
+      
     ])
     );
   }
