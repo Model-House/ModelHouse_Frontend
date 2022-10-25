@@ -4,8 +4,11 @@ import 'package:model_house/screens/principal_view.dart';
 import 'package:model_house/screens/room_option_page.dart';
 import 'package:model_house/screens/service_option_page.dart';
 
+import '../models/user.dart';
+
 class Interest extends StatelessWidget {
-  const Interest({super.key});
+  User? user;
+  Interest(this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +44,30 @@ class Interest extends StatelessWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const <Widget>[
-            AreaPage(),
-            RoomPage(),
-            ServicePage(),
-            SkipPage(),
-          ],
+          children: [AreaPage(), RoomPage(), ServicePage(), next(context)],
         ),
+      ),
+    );
+  }
+
+  Widget next(context) {
+    return Ink(
+      decoration: const ShapeDecoration(
+        color: Colors.amber,
+        shape: CircleBorder(),
+      ),
+      child: IconButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return PrincipalView(user);
+              },
+            ),
+          );
+        },
+        icon: const Icon(Icons.arrow_forward_ios_rounded),
+        color: Colors.black,
       ),
     );
   }
@@ -213,33 +233,6 @@ class ServicePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class SkipPage extends StatelessWidget {
-  const SkipPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Ink(
-      decoration: const ShapeDecoration(
-        color: Colors.amber,
-        shape: CircleBorder(),
-      ),
-      child: IconButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return PrincipalView();
-              },
-            ),
-          );
-        },
-        icon: const Icon(Icons.arrow_forward_ios_rounded),
-        color: Colors.black,
       ),
     );
   }

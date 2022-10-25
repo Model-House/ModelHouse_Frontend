@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/user.dart';
+
 class Navigation extends StatefulWidget {
   final Function currentIndex;
-  Navigation({Key? key, required this.currentIndex}) : super(key: key);
+  //User? user;
+  Navigation({required this.currentIndex});
 
   @override
   _NavigationState createState() => _NavigationState();

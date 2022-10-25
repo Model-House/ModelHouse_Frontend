@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/screens/formPost.dart';
+import 'package:model_house/screens/yourPost.dart';
 
 class Menu extends StatelessWidget {
   @override
@@ -38,7 +40,10 @@ class Menu extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => FormPost()));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border(
@@ -64,7 +69,10 @@ class Menu extends StatelessWidget {
                   ),
                 ),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => YourPost()));
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border(
