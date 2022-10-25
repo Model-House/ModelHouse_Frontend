@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:model_house/models/service.dart';
+
+import '../models/post.dart';
 
 class AvailableService extends StatelessWidget {
-  List<Service> services;
-  AvailableService(this.services);
+  List? posts;
+  AvailableService(this.posts);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: services.length,
+        itemCount: posts != null ? posts?.length : 0,
         itemBuilder: (context, index) {
-          return item_service(services[index]);
+          return item_service(posts?[index]);
         },
       ),
     );
   }
 
-  Widget item_service(Service service) {
+  Widget item_service(Post? post) {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: Color(0xff161A1D)),
@@ -26,7 +27,7 @@ class AvailableService extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.fromLTRB(10.0, 0, 0, 0),
             child: Icon(
               Icons.kitchen,
@@ -35,27 +36,27 @@ class AvailableService extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(10.0, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  service.name,
-                  style: TextStyle(
+                  post?.title == null ? '' : post!.title,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'poppins-medium',
                       fontSize: 17),
                 ),
                 Text(
-                  service.range,
-                  style: TextStyle(
+                  post?.description == null ? '' : post!.description,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'poppins-ligth',
                       fontSize: 15),
                 ),
                 Text(
-                  service.work_hours,
-                  style: TextStyle(
+                  post?.category == null ? '' : post!.category,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'poppins-regular',
                       fontSize: 10.0),
@@ -64,7 +65,7 @@ class AvailableService extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(10.0, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               Icon(
