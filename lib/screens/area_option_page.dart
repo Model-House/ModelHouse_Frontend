@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/area.dart';
 import 'package:model_house/services/area_service.dart';
 
@@ -14,29 +15,7 @@ class _AreaOptionPageState extends State<AreaOptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff1C1C1C),
-        title: RichText(
-          text: const TextSpan(children: [
-            TextSpan(
-                text: 'By ',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            TextSpan(
-                text: 'A',
-                style: TextStyle(color: Color(0xffE94545), fontSize: 20)),
-            TextSpan(
-                text: 'rea',
-                style: TextStyle(color: Colors.white, fontSize: 20))
-          ]),
-        ),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
+      appBar: appbarOptions(context, const Color(0xffE94545), 'A', 'rea'),
       body: const AreaOptions(),
     );
   }
@@ -67,7 +46,7 @@ class _AreaOptionsState extends State<AreaOptions> {
         isLoaded = true;
       });
     } else {
-      throw Exception('no cargo del todo');
+      throw Exception('Failed loading');
     }
   }
 

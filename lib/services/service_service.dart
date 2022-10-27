@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:model_house/models/service-op.dart';
 
 class ServiceService {
-  String url = 'https://localhost:7070/api/v1/';
+  String url = 'https://localhost:7120/api/v1/';
   var client = http.Client();
 
   // ignore: body_might_complete_normally_nullable

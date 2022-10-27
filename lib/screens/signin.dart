@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/interest.dart';
+import 'package:model_house/screens/place_api.dart';
 import 'package:model_house/screens/signup.dart';
 import 'package:model_house/services/security_service.dart';
 
@@ -32,7 +33,7 @@ class _SignInState extends State<SignIn> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return Interest(user);
+              return PlaceApi(user);
             },
           ),
         );
@@ -100,7 +101,7 @@ class _SignInState extends State<SignIn> {
             'OR',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: "poppins-regular"),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
           const SizedBox(
             height: 10,
@@ -118,7 +119,7 @@ class _SignInState extends State<SignIn> {
         child: const Text(
           "Sign In to continue",
           style: TextStyle(
-              color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold, fontFamily: "poppins-regular"),
+              color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ));
   }
@@ -135,7 +136,7 @@ class _SignInState extends State<SignIn> {
             backgroundColor: MaterialStateProperty.all(Colors.blueAccent)),
         child: const Text(
           'Sign In',
-          style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "poppins-regular"),
+          style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
     );
@@ -149,7 +150,7 @@ class _SignInState extends State<SignIn> {
         onPressed: () {},
         child: const Text(
           'Sign In with Google',
-          style: TextStyle(fontSize: 20, fontFamily: "poppins-regular"),
+          style: TextStyle(fontSize: 20),
         ),
       ),
     );
@@ -163,7 +164,7 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
-                  fontWeight: FontWeight.bold, fontFamily: "poppins-regular")),
+                  fontWeight: FontWeight.bold)),
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(
@@ -177,7 +178,7 @@ class _SignInState extends State<SignIn> {
             child: const Text(
               'Sign up',
               style: TextStyle(
-                  color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold, fontFamily: "poppins-regular"),
+                  color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
         ]));
@@ -192,7 +193,7 @@ class _SignInState extends State<SignIn> {
           style: const TextStyle(fontSize: 14),
           decoration: const InputDecoration(
               hintText: "Type your email or username",
-              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
+              hintStyle: TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -208,7 +209,7 @@ class _SignInState extends State<SignIn> {
           style: const TextStyle(fontSize: 14),
           decoration: const InputDecoration(
               hintText: "Type your password",
-              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
+              hintStyle: TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -225,17 +226,17 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15, fontFamily: "poppins-regular"),
+                  fontSize: 15),
             ),
             SizedBox(
-              width: 160,
+              width: 180,
             ),
             Text(
               'Forgot password?',
               style: TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15, fontFamily: "poppins-regular"),
+                  fontSize: 15),
             )
           ],
         ));
@@ -251,7 +252,7 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15, fontFamily: "poppins-regular"),
+                  fontSize: 15),
             ),
           ],
         ));
