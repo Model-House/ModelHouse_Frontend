@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/interest.dart';
 
+import '../models/area.dart';
 import '../models/user.dart';
 import '../screens/principal_view.dart';
+import '../services/area_service.dart';
 
 Widget next(BuildContext context, User? user, String value) {
   return Ink(
@@ -13,6 +15,14 @@ Widget next(BuildContext context, User? user, String value) {
     ),
     child: IconButton(
       onPressed: () {
+        if (value == 'Interest') {
+          AreaService().postPosts('Ceilings', false, user!.id);
+          AreaService().postPosts('Door Services', false, user.id);
+          AreaService().postPosts('Exterior', false, user.id);
+          AreaService().postPosts('Floors', false, user.id);
+          AreaService().postPosts('Drywall/ Walls', false, user.id);
+          AreaService().postPosts('Windows', false, user.id);
+        }
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {

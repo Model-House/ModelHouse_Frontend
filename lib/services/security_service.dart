@@ -27,7 +27,7 @@ class HttpSecurity {
     try {
       return User.fromJson(jsonDecode(response.body));
     } catch (e) {
-      print("prueba otra vez");
+      print("Error");
     }
   }
 
@@ -45,11 +45,10 @@ class HttpSecurity {
           'email': email,
           'password': password,
         }));
-    print(response.body);
     try {
       return response.body;
     } catch (e) {
-      print("no salio pipipi");
+      print("Error");
     }
   }
 }

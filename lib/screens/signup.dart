@@ -40,8 +40,8 @@ class _SignUpState extends State<SignUp> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Te Registraste con Exito"),
-                content: const Text("Inisia Sesión"),
+                title: const Text("Registration successful"),
+                content: const Text("Sign Up"),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -53,15 +53,15 @@ class _SignUpState extends State<SignUp> {
                           ),
                         );
                       },
-                      child: const Text("Esta Bien"))
+                      child: const Text("Ok"))
                 ],
               );
             });
       } else {
         if (message == '{"message":"Email is already taken"}') {
-          request = "Ese Email ya esta siendo usado";
+          request = "This Email is already used";
         } else {
-          request = "Algo salió mal intente de nuevo";
+          request = "Something bad happened. Try again.";
         }
         showDialog(
             barrierDismissible: false,
@@ -77,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                         password.text = "";
                         confirmPassword.text = "";
                       },
-                      child: const Text("Volver a intentar"))
+                      child: const Text("Try again"))
                 ],
               );
             });

@@ -32,7 +32,7 @@ class ServiceService {
     if (response.statusCode == 200) {
       return ServiceOp.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to update album.');
+      throw Exception('Failed to update service.');
     }
   }
 }

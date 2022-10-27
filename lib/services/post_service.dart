@@ -30,7 +30,7 @@ class HttpPost {
       var response = await post.get(uri);
       return postFromJson(response.body);
     } catch (e) {
-      print("algo malio sal");
+      print("Error");
     }
   }
 

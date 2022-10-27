@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Su Correo o Contrase no es correcto"),
+                title: const Text("Invalid email or password"),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -51,7 +51,7 @@ class _SignInState extends State<SignIn> {
                         email.text = "";
                         password.text = "";
                       },
-                      child: const Text("Volver a intentar"))
+                      child: const Text("Try again"))
                 ],
               );
             });
