@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:model_house/models/post.dart';
 import 'package:model_house/services/post_service.dart';
 
+import '../models/user.dart';
+
 class FormPost extends StatefulWidget {
-  const FormPost({Key? key}) : super(key: key);
+  final User? user;
+  const FormPost(this.user, {Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -89,6 +92,7 @@ class _FormPostState extends State<FormPost> {
                     post.location = category.text,
                     post.location = location.text,
                     post.description = description.text,
+                    post.userId = widget.user!.id,
                     HttpPost().postValuePost(post),
                   },
                   child: const Text(

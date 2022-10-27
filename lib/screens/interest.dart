@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:model_house/models/area.dart';
 import 'package:model_house/screens/area_option_page.dart';
 import 'package:model_house/screens/principal_view.dart';
 import 'package:model_house/screens/room_option_page.dart';
 import 'package:model_house/screens/service_option_page.dart';
+import 'package:model_house/services/area_service.dart';
 
 import '../components/btn_skip.dart';
 import '../models/user.dart';
@@ -47,7 +49,7 @@ class Interest extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const AreaPage(),
+            AreaPage(user),
             const RoomPage(),
             const ServicePage(),
             next(context, user, 'PrincipalView')
@@ -59,7 +61,8 @@ class Interest extends StatelessWidget {
 }
 
 class AreaPage extends StatelessWidget {
-  const AreaPage({super.key});
+  final User? user;
+  const AreaPage(this.user, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,7 @@ class AreaPage extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return const AreaOptionPage();
+                  return AreaOptionPage(user);
                 },
               ),
             );
