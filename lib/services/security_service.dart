@@ -1,9 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:model_house/models/post.dart';
-import 'package:model_house/services/post_service.dart';
 
 import '../models/user.dart';
 
@@ -14,6 +11,7 @@ class HttpSecurity {
   String? userId;
   var user = http.Client();
 
+  // ignore: body_might_complete_normally_nullable
   Future<User?> signIn(String email, String password) async {
     final String postUrl = urlBase + urlSignIn;
     var uri = Uri.parse(postUrl);
@@ -26,7 +24,6 @@ class HttpSecurity {
           'email': email,
           'password': password,
         }));
-    print(response.body);
     try {
       return User.fromJson(jsonDecode(response.body));
     } catch (e) {
@@ -34,7 +31,8 @@ class HttpSecurity {
     }
   }
 
-  Future<User?> signUp(String username, String email, String password) async {
+  // ignore: body_might_complete_normally_nullable
+  Future<String?> signUp(String username, String email, String password) async {
     final String postUrl = urlBase + urlSignUp;
     var uri = Uri.parse(postUrl);
     var response = await user.post(uri,
@@ -47,8 +45,9 @@ class HttpSecurity {
           'email': email,
           'password': password,
         }));
+    print(response.body);
     try {
-      return User.fromJson(jsonDecode(response.body));
+      return response.body;
     } catch (e) {
       print("no salio pipipi");
     }

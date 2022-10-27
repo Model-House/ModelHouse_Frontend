@@ -21,7 +21,6 @@ class _SignInState extends State<SignIn> {
 
   void initState() {
     _httpSecurity = HttpSecurity();
-    initialize();
     super.initState();
   }
 
@@ -29,7 +28,6 @@ class _SignInState extends State<SignIn> {
     user = await _httpSecurity?.signIn(email.text, password.text);
     setState(() {
       user = user;
-      print(user?.username);
       if (user?.username != null) {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -38,9 +36,29 @@ class _SignInState extends State<SignIn> {
             },
           ),
         );
+      } else {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Su Correo o Contrase no es correcto"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        email.text = "";
+                        password.text = "";
+                      },
+                      child: const Text("Volver a intentar"))
+                ],
+              );
+            });
       }
     });
   }
+
+  void showAlert(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
@@ -139,9 +157,9 @@ class _SignInState extends State<SignIn> {
 
   Container noAccount() {
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(children: [
-          Text("Don't have an account? ",
+          const Text("Don't have an account? ",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
@@ -156,7 +174,7 @@ class _SignInState extends State<SignIn> {
                 ),
               );
             },
-            child: Text(
+            child: const Text(
               'Sign up',
               style: TextStyle(
                   color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:model_house/models/option.dart';
 import 'package:model_house/models/area.dart';
 import 'package:model_house/services/area_service.dart';
 
@@ -23,7 +22,8 @@ class _AreaOptionPageState extends State<AreaOptionPage> {
                 text: 'By ',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             TextSpan(
-                text: 'A', style: TextStyle(color: Color(0xffE94545), fontSize: 20)),
+                text: 'A',
+                style: TextStyle(color: Color(0xffE94545), fontSize: 20)),
             TextSpan(
                 text: 'rea',
                 style: TextStyle(color: Colors.white, fontSize: 20))
@@ -70,67 +70,6 @@ class _AreaOptionsState extends State<AreaOptions> {
       throw Exception('no cargo del todo');
     }
   }
-
-  // updateData(int id, bool check) async {
-  //   await RemoteService().updatePosts(id, check);
-  // }
-
-  // List<Option> areas = [
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Ceilings',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Door Services',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Exterior',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Floors',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Drywall/Walls',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Windows',
-  //     false,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {

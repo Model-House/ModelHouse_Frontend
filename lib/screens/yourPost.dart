@@ -30,11 +30,12 @@ class _YourPostState extends State<YourPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        title: Text("Your Posts"),
+        title: const Text("Your Posts"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: ListView.builder(
             itemCount: posts?.length,
             itemBuilder: ((context, index) {

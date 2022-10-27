@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:model_house/components/navigation.dart';
 import 'package:model_house/components/routes.dart';
@@ -6,7 +5,7 @@ import 'package:model_house/components/routes.dart';
 import '../models/user.dart';
 
 class PrincipalView extends StatefulWidget {
-  User? user;
+  final User? user;
   PrincipalView(this.user);
 
   @override
@@ -32,7 +31,7 @@ class _PrincipalViewState extends State<PrincipalView> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       bottomNavigationBar: myNavigation,
-      body: Routes(index: index),
+      body: Routes(widget.user, index: index),
     );
   }
 }

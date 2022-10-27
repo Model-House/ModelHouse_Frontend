@@ -21,7 +21,8 @@ class AvailableService extends StatelessWidget {
   Widget item_service(Post? post) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Color(0xff161A1D)),
+          borderRadius: BorderRadius.circular(10),
+          color: const Color(0xff161A1D)),
       padding: const EdgeInsets.all(15.0),
       margin: const EdgeInsets.all(15.0),
       child: Row(
@@ -67,12 +68,13 @@ class AvailableService extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
             child:
+                // ignore: prefer_const_literals_to_create_immutables
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              Icon(
+              const Icon(
                 Icons.bookmark,
                 color: Colors.white,
               ),
-              Icon(
+              const Icon(
                 Icons.chevron_right,
                 color: Colors.white,
               )
