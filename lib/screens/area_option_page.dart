@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:model_house/models/option.dart';
+import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/area.dart';
+import 'package:model_house/models/user.dart';
 import 'package:model_house/services/area_service.dart';
 
 class AreaOptionPage extends StatefulWidget {
-  const AreaOptionPage({super.key});
+  final User? user;
+  AreaOptionPage(this.user, {super.key});
 
   @override
   State<AreaOptionPage> createState() => _AreaOptionPageState();
@@ -15,35 +17,15 @@ class _AreaOptionPageState extends State<AreaOptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff1C1C1C),
-        title: RichText(
-          text: const TextSpan(children: [
-            TextSpan(
-                text: 'By ',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            TextSpan(
-                text: 'A', style: TextStyle(color: Color(0xffE94545), fontSize: 20)),
-            TextSpan(
-                text: 'rea',
-                style: TextStyle(color: Colors.white, fontSize: 20))
-          ]),
-        ),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
-      body: const AreaOptions(),
+      appBar: appbarOptions(context, const Color(0xffE94545), 'A', 'rea'),
+      body: AreaOptions(widget.user),
     );
   }
 }
 
 class AreaOptions extends StatefulWidget {
-  const AreaOptions({super.key});
+  final User? user;
+  const AreaOptions(this.user, {super.key});
 
   @override
   State<AreaOptions> createState() => _AreaOptionsState();
@@ -61,76 +43,15 @@ class _AreaOptionsState extends State<AreaOptions> {
   }
 
   getData() async {
-    posts = await AreaService().getPosts();
+    posts = await AreaService().getPostsByUserId(widget.user!.id);
     if (posts != null) {
       setState(() {
         isLoaded = true;
       });
     } else {
-      throw Exception('no cargo del todo');
+      throw Exception('Failed loading');
     }
   }
-
-  // updateData(int id, bool check) async {
-  //   await RemoteService().updatePosts(id, check);
-  // }
-
-  // List<Option> areas = [
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Ceilings',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Door Services',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Exterior',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Floors',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Drywall/Walls',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xffE94545),
-  //     ),
-  //     'Windows',
-  //     false,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -156,9 +77,10 @@ class _AreaOptionsState extends State<AreaOptions> {
               onTap: () {
                 setState(() {
                   posts![index].check = !posts![index].check;
-                  AreaService().updatePosts(index, posts![index].check);
+                  AreaService()
+                      .updatePosts(index, posts![index].check, widget.user!.id);
                 });
-                debugPrint('${posts![index].check}');
+                // debugPrint('${posts![index].check}');
               },
               child: SizedBox(
                 width: 200,

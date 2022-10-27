@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/user.dart';
+
 class Navigation extends StatefulWidget {
   final Function currentIndex;
-  Navigation({Key? key, required this.currentIndex}) : super(key: key);
+  //User? user;
+  Navigation({required this.currentIndex});
 
   @override
   _NavigationState createState() => _NavigationState();
@@ -21,7 +24,7 @@ class _NavigationState extends State<Navigation> {
         });
       },
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Color(0XFFFF0080),
+      selectedItemColor: const Color(0XFFFF0080),
       unselectedItemColor: Colors.white,
       iconSize: 30.0,
       selectedFontSize: 12.0,

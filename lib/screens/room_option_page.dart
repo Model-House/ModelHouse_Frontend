@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/room.dart';
 import 'package:model_house/services/room_service.dart';
 
@@ -14,28 +15,7 @@ class _RoomOptionPageState extends State<RoomOptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff1C1C1C),
-        title: RichText(
-          text: const TextSpan(children: [
-            TextSpan(
-                text: 'By ',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            TextSpan(
-                text: 'R', style: TextStyle(color: Color(0xff457DE9), fontSize: 20)),
-            TextSpan(
-                text: 'oom',
-                style: TextStyle(color: Colors.white, fontSize: 20))
-          ]),
-        ),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
+      appBar: appbarOptions(context, const Color(0xff457DE9), 'R', 'oom'),
       body: const RoomOptions(),
     );
   }
@@ -66,92 +46,9 @@ class _RoomOptionsState extends State<RoomOptions> {
         isLoaded = true;
       });
     } else {
-      throw Exception('no cargo del todo');
+      throw Exception('Failed Loading');
     }
   }
-  // List<Option> areas = [
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Attic',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Deck & Patio',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Bathroom',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Garage',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Bedroom',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Office',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Basement',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Kitchen',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Living Room',
-  //     false,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {

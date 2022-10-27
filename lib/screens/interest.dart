@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:model_house/models/area.dart';
 import 'package:model_house/screens/area_option_page.dart';
 import 'package:model_house/screens/principal_view.dart';
 import 'package:model_house/screens/room_option_page.dart';
 import 'package:model_house/screens/service_option_page.dart';
+import 'package:model_house/services/area_service.dart';
+
+import '../components/btn_skip.dart';
+import '../models/user.dart';
 
 class Interest extends StatelessWidget {
-  const Interest({super.key});
+  User? user;
+  Interest(this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +20,8 @@ class Interest extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'Poppins',
-          primaryColor: Color(0XFF1C1C1C),
-          accentColor: Color(0XFF161A1D),
+          primaryColor: const Color(0XFF1C1C1C),
+          accentColor: const Color(0XFF161A1D),
           textTheme: const TextTheme(
             headline1: TextStyle(
                 fontFamily: 'poppins-medium',
@@ -41,11 +48,11 @@ class Interest extends StatelessWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const <Widget>[
-            AreaPage(),
-            RoomPage(),
-            ServicePage(),
-            SkipPage(),
+          children: [
+            AreaPage(user),
+            const RoomPage(),
+            const ServicePage(),
+            next(context, user, 'PrincipalView')
           ],
         ),
       ),
@@ -54,7 +61,8 @@ class Interest extends StatelessWidget {
 }
 
 class AreaPage extends StatelessWidget {
-  const AreaPage({super.key});
+  final User? user;
+  const AreaPage(this.user, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +82,7 @@ class AreaPage extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return const AreaOptionPage();
+                  return AreaOptionPage(user);
                 },
               ),
             );
@@ -213,33 +221,6 @@ class ServicePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class SkipPage extends StatelessWidget {
-  const SkipPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Ink(
-      decoration: const ShapeDecoration(
-        color: Colors.amber,
-        shape: CircleBorder(),
-      ),
-      child: IconButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return PrincipalView();
-              },
-            ),
-          );
-        },
-        icon: const Icon(Icons.arrow_forward_ios_rounded),
-        color: Colors.black,
       ),
     );
   }

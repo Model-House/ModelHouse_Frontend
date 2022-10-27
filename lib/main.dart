@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:model_house/screens/home.dart';
-import 'package:model_house/screens/interest.dart';
-import 'package:model_house/screens/principal_view.dart';
 import 'package:model_house/screens/sessionoptions.dart';
 
 void main() {
@@ -16,8 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const SessionOptions(),
       theme: ThemeData(
-          primaryColor: Color(0XFF1C1C1C),
-          accentColor: Color(0XFF161A1D),
+          primaryColor: const Color(0XFF1C1C1C),
+          // ignore: deprecated_member_use
+          accentColor: const Color(0XFF161A1D),
           textTheme: const TextTheme(
             headline1: TextStyle(
                 fontFamily: 'poppins-medium',

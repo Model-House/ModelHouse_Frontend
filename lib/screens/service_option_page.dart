@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/option.dart';
 import 'package:model_house/models/service-op.dart';
 import 'package:model_house/services/service_service.dart';
@@ -15,28 +16,7 @@ class _ServiceOptionPageState extends State<ServiceOptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff1C1C1C),
-        title: RichText(
-          text: const TextSpan(children: [
-            TextSpan(
-                text: 'By ',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            TextSpan(
-                text: 'S', style: TextStyle(color: Color(0xff74806D), fontSize: 20)),
-            TextSpan(
-                text: 'ervice',
-                style: TextStyle(color: Colors.white, fontSize: 20))
-          ]),
-        ),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
+      appBar: appbarOptions(context, const Color(0xff74806D), 'S', 'ervice'),
       body: const ServiceOptions(),
     );
   }
@@ -70,80 +50,6 @@ class _ServiceOptionsState extends State<ServiceOptions> {
       throw Exception('no cargo del todo');
     }
   }
-  // List<Option> areas = [
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Installation',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Maintenance',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Painting',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Plumbing',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Repair',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Electrical',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Assembly',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Safety & Mobility',
-  //     false,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {

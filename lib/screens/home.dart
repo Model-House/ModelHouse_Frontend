@@ -1,28 +1,54 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:model_house/components/navigation.dart';
+import 'package:model_house/models/post.dart';
 
-class Home extends StatelessWidget {
+import '../services/post_service.dart';
+
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   int index = 0;
   String name = "hols";
-  Icon _icon = Icon(
+  List? posts;
+  HttpPost? _httpPost;
+
+  final Icon _icon = const Icon(
     Icons.bathroom,
     color: Color(0XFFF5CB5C),
     size: 45,
   );
+
+  @override
+  void initState() {
+    _httpPost = HttpPost();
+    initialize();
+    super.initState();
+  }
+
+  Future initialize() async {
+    posts = List.empty();
+    posts = await _httpPost?.getAllPost();
+    setState(() {
+      posts = posts;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(15, 35, 15, 15),
+          padding: const EdgeInsets.fromLTRB(15, 35, 15, 15),
           child: Container(
               decoration: BoxDecoration(
-                  color: Color(0XFF3e3e43),
+                  color: const Color(0XFF3e3e43),
                   borderRadius: BorderRadius.circular(8.0)),
               child: TextFormField(
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
                     fontFamily: 'poppins-regular'),
@@ -42,7 +68,7 @@ class Home extends StatelessWidget {
               )),
         ),
         Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: CarouselSlider(
             options: CarouselOptions(
                 enableInfiniteScroll: true,
@@ -50,42 +76,77 @@ class Home extends StatelessWidget {
                 viewportFraction: 1,
                 autoPlay: true,
                 enlargeStrategy: CenterPageEnlargeStrategy.height,
-                autoPlayAnimationDuration: Duration(seconds: 4)),
+                autoPlayAnimationDuration: const Duration(seconds: 4)),
             items: [
               Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
                       ])),
               Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
                       ])),
               Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
                       ])),
             ],
           ),
-        )
+        ),
+        TopPosts(posts)
       ],
     );
   }
+}
+
+Widget TopPosts(List? posts) {
+  return Expanded(
+    child: ListView.builder(
+        itemCount: posts?.length,
+        itemBuilder: (context, index) {
+          return item_service(posts?[index]);
+        }),
+  );
+}
+
+Widget item_service(Post post) {
+  return Container(
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: const Color(0xff161A1D)),
+    padding: const EdgeInsets.all(10),
+    margin: const EdgeInsets.all(10),
+    child: Row(
+      children: [
+        SizedBox(
+          height: 100,
+          width: 100,
+          child: Image.network(
+              'https://definicion.de/wp-content/uploads/2014/03/remodelacion.jpg'),
+        ),
+        Text(
+          post.description,
+          style: const TextStyle(color: Colors.white),
+        )
+      ],
+    ),
+  );
 }
