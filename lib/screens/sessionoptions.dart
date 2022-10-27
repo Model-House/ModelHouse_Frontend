@@ -39,7 +39,7 @@ Widget body() {
   Container title() {
     return Container(
       padding: const EdgeInsets.all(20),
-      child: const Text("Sign In to continue", style: TextStyle(color: Colors.white, fontSize: 48.0, fontWeight: FontWeight.bold),
+      child: const Text("Sign In to continue", style: TextStyle(color: Colors.white, fontSize: 48.0, fontWeight: FontWeight.bold, fontFamily: "poppins-regular"),
       textAlign: TextAlign.center,
     ));
   }
@@ -61,10 +61,10 @@ Widget body() {
               );
             }, 
             child: const Text('Sign Up',
-            style: TextStyle(fontSize: 20),),
+            style: TextStyle(fontSize: 20, fontFamily: "poppins-regular"),),
           ),
           const SizedBox(
-          width: 55,
+          width: 35,
           ),
           ElevatedButton(
             onPressed: () {
@@ -78,7 +78,7 @@ Widget body() {
             }, 
             style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
             child: const Text('Sign In',
-            style: TextStyle(fontSize: 20, color: Colors.black),),
+            style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: "poppins-regular"),),
           ),
         ]
       )
