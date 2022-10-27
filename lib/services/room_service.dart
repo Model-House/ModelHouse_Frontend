@@ -7,6 +7,7 @@ class RoomService {
   String url = 'https://localhost:7070/api/v1/';
   var client = http.Client();
 
+  // ignore: body_might_complete_normally_nullable
   Future<List<Room>?> getPosts() async {
     var uri = Uri.parse('${url}rooms');
     var response = await client.get(uri);

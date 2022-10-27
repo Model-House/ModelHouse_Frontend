@@ -7,6 +7,7 @@ class ServiceService {
   String url = 'https://localhost:7070/api/v1/';
   var client = http.Client();
 
+  // ignore: body_might_complete_normally_nullable
   Future<List<ServiceOp>?> getPosts() async {
     var uri = Uri.parse('${url}services');
     var response = await client.get(uri);
@@ -29,12 +30,8 @@ class ServiceService {
     );
 
     if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
       return ServiceOp.fromJson(jsonDecode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
       throw Exception('Failed to update album.');
     }
   }

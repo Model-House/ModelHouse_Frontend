@@ -22,7 +22,8 @@ class _RoomOptionPageState extends State<RoomOptionPage> {
                 text: 'By ',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             TextSpan(
-                text: 'R', style: TextStyle(color: Color(0xff457DE9), fontSize: 20)),
+                text: 'R',
+                style: TextStyle(color: Color(0xff457DE9), fontSize: 20)),
             TextSpan(
                 text: 'oom',
                 style: TextStyle(color: Colors.white, fontSize: 20))
@@ -69,89 +70,6 @@ class _RoomOptionsState extends State<RoomOptions> {
       throw Exception('no cargo del todo');
     }
   }
-  // List<Option> areas = [
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Attic',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Deck & Patio',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Bathroom',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Garage',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Bedroom',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Office',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Basement',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Kitchen',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff457DE9),
-  //     ),
-  //     'Living Room',
-  //     false,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {

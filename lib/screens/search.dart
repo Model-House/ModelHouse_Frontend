@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:model_house/components/available_service.dart';
-import 'package:model_house/models/post.dart';
 
 import '../services/post_service.dart';
 
@@ -22,7 +20,6 @@ class _SearchState extends State<Search> {
   }
 
   Future initialize(String title) async {
-    print(title);
     post = await _httpPost?.getByTitle(title);
     setState(() {
       post = post;

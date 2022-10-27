@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   List? posts;
   HttpPost? _httpPost;
 
-  Icon _icon = Icon(
+  final Icon _icon = const Icon(
     Icons.bathroom,
     color: Color(0XFFF5CB5C),
     size: 45,
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.fromLTRB(15, 35, 15, 15),
           child: Container(
               decoration: BoxDecoration(
-                  color: Color(0XFF3e3e43),
+                  color: const Color(0XFF3e3e43),
                   borderRadius: BorderRadius.circular(8.0)),
               child: TextFormField(
                 style: const TextStyle(
@@ -84,29 +84,29 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
                       ])),
               Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
                       ])),
               Container(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
-                        MaterialButton(onPressed: () {}, child: this._icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(onPressed: () {}, child: _icon),
                       ])),
             ],
           ),
@@ -130,7 +130,8 @@ Widget TopPosts(List? posts) {
 Widget item_service(Post post) {
   return Container(
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10), color: Color(0xff161A1D)),
+        borderRadius: BorderRadius.circular(10),
+        color: const Color(0xff161A1D)),
     padding: const EdgeInsets.all(10),
     margin: const EdgeInsets.all(10),
     child: Row(

@@ -11,6 +11,7 @@ class HttpPost {
   String? userId;
   var post = http.Client();
 
+  // ignore: body_might_complete_normally_nullable
   Future<List?> getAllPost() async {
     final String getAll = urlBase + urlGetAll;
     var uri = Uri.parse(getAll);
@@ -21,23 +22,19 @@ class HttpPost {
     }
   }
 
+  // ignore: body_might_complete_normally_nullable
   Future<List?> getByTitle(String title) async {
     final String getByTitle = urlBase + urlGetAll + title;
     try {
-      print(getByTitle);
       var uri = Uri.parse(getByTitle);
       var response = await post.get(uri);
       return postFromJson(response.body);
     } catch (e) {
       print("algo malio sal");
     }
-    //if (response.statusCode == 200) {
-    //  return Post.fromJson(jsonDecode(response.body));
-    //} else {
-    //  throw ('Failed to update album');
-    //}
   }
 
+  // ignore: body_might_complete_normally_nullable
   Future<List?> getPostByUserId(String id) async {
     final String getByUserId = urlBase + urlGetUserId + id;
     var uri = Uri.parse(getByUserId);
@@ -48,10 +45,10 @@ class HttpPost {
     }
   }
 
+  // ignore: body_might_complete_normally_nullable
   Future<Post?> postValuePost(Post value) async {
     final String postUrl = urlBase + urlGetAll;
     var uri = Uri.parse(postUrl);
-    print(value.title);
     var response = await post.post(uri,
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',

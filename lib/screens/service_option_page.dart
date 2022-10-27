@@ -23,7 +23,8 @@ class _ServiceOptionPageState extends State<ServiceOptionPage> {
                 text: 'By ',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             TextSpan(
-                text: 'S', style: TextStyle(color: Color(0xff74806D), fontSize: 20)),
+                text: 'S',
+                style: TextStyle(color: Color(0xff74806D), fontSize: 20)),
             TextSpan(
                 text: 'ervice',
                 style: TextStyle(color: Colors.white, fontSize: 20))
@@ -70,80 +71,6 @@ class _ServiceOptionsState extends State<ServiceOptions> {
       throw Exception('no cargo del todo');
     }
   }
-  // List<Option> areas = [
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Installation',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Maintenance',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Painting',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Plumbing',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Repair',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Electrical',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Assembly',
-  //     false,
-  //   ),
-  //   Option(
-  //     const Icon(
-  //       Icons.arrow_back,
-  //       size: 70,
-  //       color: Color(0xff74806D),
-  //     ),
-  //     'Safety & Mobility',
-  //     false,
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {

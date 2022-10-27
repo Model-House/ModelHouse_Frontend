@@ -16,8 +16,8 @@ class Interest extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'Poppins',
-          primaryColor: Color(0XFF1C1C1C),
-          accentColor: Color(0XFF161A1D),
+          primaryColor: const Color(0XFF1C1C1C),
+          accentColor: const Color(0XFF161A1D),
           textTheme: const TextTheme(
             headline1: TextStyle(
                 fontFamily: 'poppins-medium',
@@ -44,7 +44,12 @@ class Interest extends StatelessWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [AreaPage(), RoomPage(), ServicePage(), next(context)],
+          children: [
+            const AreaPage(),
+            const RoomPage(),
+            const ServicePage(),
+            next(context)
+          ],
         ),
       ),
     );
