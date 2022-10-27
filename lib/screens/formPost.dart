@@ -24,6 +24,7 @@ class _FormPostState extends State<FormPost> {
 
   InputDecoration decoratioInput = InputDecoration(
       fillColor: Colors.white,
+      filled: true,
       border: OutlineInputBorder(
           borderSide: const BorderSide(color: Color(0xffEBDCFA)),
           borderRadius: BorderRadius.circular(40)),

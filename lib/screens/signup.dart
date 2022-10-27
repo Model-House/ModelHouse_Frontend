@@ -245,7 +245,7 @@ class _SignUpState extends State<SignUp> {
             });
           }),
       const Text('I have read and agree to the ',
-          style: TextStyle(color: Colors.white, fontSize: 13)),
+          style: TextStyle(color: Colors.white, fontSize: 12)),
       const Text(
         'Terms of service ',
         style: TextStyle(color: Colors.red, fontSize: 13),
