@@ -136,7 +136,7 @@ class _SignUpState extends State<SignUp> {
     return const Text(
       "Complete the Sign Up",
       style: TextStyle(
-          color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold),
+          color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold, fontFamily: "poppins-regular"),
     );
   }
 
@@ -146,10 +146,10 @@ class _SignUpState extends State<SignUp> {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
           controller: username,
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14, fontFamily: "poppins-regular"),
           decoration: const InputDecoration(
             hintText: "Set a username for your profile",
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
             fillColor: Colors.white,
             filled: true,
             border: InputBorder.none,
@@ -163,10 +163,10 @@ class _SignUpState extends State<SignUp> {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
           controller: email,
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14, fontFamily: "poppins-regular"),
           decoration: const InputDecoration(
               hintText: "Type your email",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -179,10 +179,10 @@ class _SignUpState extends State<SignUp> {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
           controller: password,
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14, fontFamily: "poppins-regular"),
           decoration: const InputDecoration(
               hintText: "Type your password",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -195,10 +195,10 @@ class _SignUpState extends State<SignUp> {
         margin: const EdgeInsets.symmetric(horizontal: 10),
         child: TextField(
           controller: confirmPassword,
-          style: const TextStyle(fontSize: 14),
+          style: const TextStyle(fontSize: 14, fontFamily: "poppins-regular"),
           decoration: const InputDecoration(
               hintText: "Type your password again",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -215,7 +215,7 @@ class _SignUpState extends State<SignUp> {
         },
         child: const Text(
           'Sign Up',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16, fontFamily: "poppins-regular"),
         ),
       ),
     );
@@ -231,7 +231,7 @@ class _SignUpState extends State<SignUp> {
             });
           }),
       const Text('Enterprise account?',
-          style: TextStyle(color: Colors.white, fontSize: 14)),
+          style: TextStyle(color: Colors.white, fontSize: 11, fontFamily: "poppins-regular")),
     ]);
   }
 
@@ -245,15 +245,15 @@ class _SignUpState extends State<SignUp> {
             });
           }),
       const Text('I have read and agree to the ',
-          style: TextStyle(color: Colors.white, fontSize: 13)),
+          style: TextStyle(color: Colors.white, fontSize: 11, fontFamily: "poppins-regular")),
       const Text(
         'Terms of service ',
-        style: TextStyle(color: Colors.red, fontSize: 13),
+        style: TextStyle(color: Colors.red, fontSize: 11, fontFamily: "poppins-regular"),
       ),
-      const Text('& ', style: TextStyle(color: Colors.white, fontSize: 13)),
+      const Text('& ', style: TextStyle(color: Colors.white, fontSize: 11, fontFamily: "poppins-regular")),
       const Text(
         'Privacy policy',
-        style: TextStyle(color: Colors.red, fontSize: 13),
+        style: TextStyle(color: Colors.red, fontSize: 11, fontFamily: "poppins-regular"),
       ),
     ]);
   }
@@ -268,7 +268,7 @@ class _SignUpState extends State<SignUp> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             ),
           ],
         ));
@@ -284,7 +284,7 @@ class _SignUpState extends State<SignUp> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             ),
           ],
         ));
@@ -300,7 +300,7 @@ class _SignUpState extends State<SignUp> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             ),
           ],
         ));
@@ -316,7 +316,7 @@ class _SignUpState extends State<SignUp> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             ),
           ],
         ));

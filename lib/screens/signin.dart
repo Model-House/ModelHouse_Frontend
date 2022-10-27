@@ -100,7 +100,7 @@ class _SignInState extends State<SignIn> {
             'OR',
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20, fontFamily: "poppins-regular"),
           ),
           const SizedBox(
             height: 10,
@@ -118,7 +118,7 @@ class _SignInState extends State<SignIn> {
         child: const Text(
           "Sign In to continue",
           style: TextStyle(
-              color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold),
+              color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.bold, fontFamily: "poppins-regular"),
           textAlign: TextAlign.center,
         ));
   }
@@ -135,7 +135,7 @@ class _SignInState extends State<SignIn> {
             backgroundColor: MaterialStateProperty.all(Colors.blueAccent)),
         child: const Text(
           'Sign In',
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "poppins-regular"),
         ),
       ),
     );
@@ -149,7 +149,7 @@ class _SignInState extends State<SignIn> {
         onPressed: () {},
         child: const Text(
           'Sign In with Google',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20, fontFamily: "poppins-regular"),
         ),
       ),
     );
@@ -163,7 +163,7 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold, fontFamily: "poppins-regular")),
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(
@@ -177,7 +177,7 @@ class _SignInState extends State<SignIn> {
             child: const Text(
               'Sign up',
               style: TextStyle(
-                  color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),
+                  color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold, fontFamily: "poppins-regular"),
             ),
           ),
         ]));
@@ -192,7 +192,7 @@ class _SignInState extends State<SignIn> {
           style: const TextStyle(fontSize: 14),
           decoration: const InputDecoration(
               hintText: "Type your email or username",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -208,7 +208,7 @@ class _SignInState extends State<SignIn> {
           style: const TextStyle(fontSize: 14),
           decoration: const InputDecoration(
               hintText: "Type your password",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: TextStyle(color: Colors.grey, fontFamily: "poppins-regular"),
               fillColor: Colors.white,
               filled: true,
               border: InputBorder.none),
@@ -225,17 +225,17 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             ),
             SizedBox(
-              width: 180,
+              width: 160,
             ),
             Text(
               'Forgot password?',
               style: TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             )
           ],
         ));
@@ -251,7 +251,7 @@ class _SignInState extends State<SignIn> {
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15),
+                  fontSize: 15, fontFamily: "poppins-regular"),
             ),
           ],
         ));
