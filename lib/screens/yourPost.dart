@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:model_house/services/post_service.dart';
 
+import '../models/user.dart';
+
 class YourPost extends StatefulWidget {
-  const YourPost({Key? key}) : super(key: key);
+  final User? user;
+  const YourPost(this.user, {Key? key}) : super(key: key);
 
   @override
   _YourPostState createState() => _YourPostState();
@@ -21,7 +24,7 @@ class _YourPostState extends State<YourPost> {
 
   Future initialize() async {
     posts = List.empty();
-    posts = await _httpPost?.getPostByUserId("1");
+    posts = await _httpPost?.getPostByUserId(widget.user!.id.toString());
     setState(() {
       posts = posts;
     });

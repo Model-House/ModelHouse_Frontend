@@ -229,7 +229,7 @@ class _SignInState extends State<SignIn> {
                   fontSize: 15),
             ),
             SizedBox(
-              width: 180,
+              width: 140,
             ),
             Text(
               'Forgot password?',

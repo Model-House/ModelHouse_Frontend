@@ -77,7 +77,7 @@ class Menu extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const YourPost()));
+                        builder: (context) => YourPost(user)));
                   },
                   child: Container(
                     decoration: const BoxDecoration(
