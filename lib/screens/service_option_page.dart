@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/option.dart';
 import 'package:model_house/models/service-op.dart';
 import 'package:model_house/services/service_service.dart';
@@ -15,29 +16,7 @@ class _ServiceOptionPageState extends State<ServiceOptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
-      appBar: AppBar(
-        backgroundColor: const Color(0xff1C1C1C),
-        title: RichText(
-          text: const TextSpan(children: [
-            TextSpan(
-                text: 'By ',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            TextSpan(
-                text: 'S',
-                style: TextStyle(color: Color(0xff74806D), fontSize: 20)),
-            TextSpan(
-                text: 'ervice',
-                style: TextStyle(color: Colors.white, fontSize: 20))
-          ]),
-        ),
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
-      ),
+      appBar: appbarOptions(context, const Color(0xff74806D), 'S', 'ervice'),
       body: const ServiceOptions(),
     );
   }

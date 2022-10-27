@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:model_house/screens/area_option_page.dart';
 import 'package:model_house/screens/principal_view.dart';
 import 'package:model_house/screens/room_option_page.dart';
 import 'package:model_house/screens/service_option_page.dart';
 
+import '../components/btn_skip.dart';
 import '../models/user.dart';
 
 class Interest extends StatelessWidget {
@@ -48,31 +50,9 @@ class Interest extends StatelessWidget {
             const AreaPage(),
             const RoomPage(),
             const ServicePage(),
-            next(context)
+            next(context, user, 'PrincipalView')
           ],
         ),
-      ),
-    );
-  }
-
-  Widget next(context) {
-    return Ink(
-      decoration: const ShapeDecoration(
-        color: Colors.amber,
-        shape: CircleBorder(),
-      ),
-      child: IconButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return PrincipalView(user);
-              },
-            ),
-          );
-        },
-        icon: const Icon(Icons.arrow_forward_ios_rounded),
-        color: Colors.black,
       ),
     );
   }
