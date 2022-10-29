@@ -47,46 +47,58 @@ class _SessionOptionsState extends State<SessionOptions> {
         ));
   }
 
-  Container buttons() {
+  Widget buttons() {
     return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 70),
-        width: MediaQuery.of(context).size.width - 10,
-        child: Row(children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return const SignUpChoice();
-                  },
-                ),
-              );
-            },
-            child: const Text(
-              'Sign Up',
-              style: TextStyle(fontSize: 20),
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 120,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const SignUpChoice();
+                    },
+                  ),
+                );
+              },
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
           const SizedBox(
-            width: 30,
+            width: 40,
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return const SignIn();
-                  },
-                ),
-              );
-            },
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white)),
-            child: const Text(
-              'Sign In',
-              style: TextStyle(fontSize: 20, color: Colors.black),
+          Container(
+            width: 120,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const SignIn();
+                    },
+                  ),
+                );
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+              ),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }
