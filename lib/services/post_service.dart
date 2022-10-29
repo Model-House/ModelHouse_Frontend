@@ -46,22 +46,25 @@ class HttpPost {
   }
 
   // ignore: body_might_complete_normally_nullable
-  Future<Post?> postValuePost(Post value) async {
+  Future<Post?> postValuePost(String title, int price, String category,
+      String location, String description, int userId) async {
     final String postUrl = urlBase + urlGetAll;
     var uri = Uri.parse(postUrl);
+    print(userId);
     var response = await post.post(uri,
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           "Accept": "application/json"
         },
         body: jsonEncode({
-          'price': value.price,
-          'title': value.title,
-          'category': value.category,
-          'location': value.location,
-          'description': value.description,
-          'userId': value.userId
+          'price': price,
+          'title': title,
+          'category': category,
+          'location': location,
+          'description': description,
+          'userId': userId
         }));
+    print("dsnuihsbdiugsd");
     if (response.statusCode == 200) {
       return Post.fromJson(jsonDecode(response.body));
     }

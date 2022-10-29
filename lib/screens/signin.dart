@@ -15,6 +15,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isCheckbox = false;
+  bool isVisivilityPassword = true;
   final password = TextEditingController();
   final email = TextEditingController();
   HttpSecurity? _httpSecurity;
@@ -76,8 +77,7 @@ class _SignInState extends State<SignIn> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
         children: <Widget>[
           title(),
           const SizedBox(
@@ -191,12 +191,14 @@ class _SignInState extends State<SignIn> {
         child: TextField(
           controller: email,
           style: const TextStyle(fontSize: 14),
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
               hintText: "Type your email or username",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: const TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
-              border: InputBorder.none),
+              border: InputBorder.none,
+              enabledBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         ));
   }
 
@@ -207,12 +209,24 @@ class _SignInState extends State<SignIn> {
         child: TextField(
           controller: password,
           style: const TextStyle(fontSize: 14),
-          decoration: const InputDecoration(
+          keyboardType: TextInputType.visiblePassword,
+          obscureText: isVisivilityPassword,
+          decoration: InputDecoration(
               hintText: "Type your password",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: const TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
-              border: InputBorder.none),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    isVisivilityPassword = !isVisivilityPassword;
+                  });
+                },
+                icon: const Icon(Icons.visibility),
+              ),
+              enabledBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         ));
   }
 
@@ -220,8 +234,8 @@ class _SignInState extends State<SignIn> {
     return Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
-          children: const [
-            Text(
+          children: <Widget>[
+            const Text(
               'Password',
               style: TextStyle(
                   color: Colors.white,
@@ -229,15 +243,20 @@ class _SignInState extends State<SignIn> {
                   fontSize: 15),
             ),
             SizedBox(
-              width: 140,
-            ),
-            Text(
-              'Forgot password?',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15),
-            )
+                width: 200,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Text(
+                      'Forgot password?',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    )
+                  ],
+                ))
           ],
         ));
   }

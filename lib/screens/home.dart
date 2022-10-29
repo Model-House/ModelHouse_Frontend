@@ -142,10 +142,11 @@ Widget item_service(Post post) {
           child: Image.network(
               'https://definicion.de/wp-content/uploads/2014/03/remodelacion.jpg'),
         ),
-        Text(
+        Expanded(
+            child: Text(
           post.description,
           style: const TextStyle(color: Colors.white),
-        )
+        ))
       ],
     ),
   );

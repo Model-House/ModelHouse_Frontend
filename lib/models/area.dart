@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 List<Area> postFromJson(String str) =>
     List<Area>.from(json.decode(str).map((x) => Area.fromJson(x)));

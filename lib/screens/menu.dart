@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/formPost.dart';
+import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/yourPost.dart';
 
 import '../models/user.dart';
@@ -286,7 +287,15 @@ class Menu extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(5),
         child: MaterialButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return const SignIn();
+                },
+              ),
+            );
+          },
           child: Container(
             decoration: BoxDecoration(
                 color: const Color(0xffE43848),

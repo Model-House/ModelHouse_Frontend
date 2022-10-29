@@ -17,6 +17,8 @@ class _SignUpState extends State<SignUp> {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  bool isPassword = true;
+  bool isConfirmPassword = true;
   bool isCheckbox = false;
   bool isCheckboxV2 = false;
   HttpSecurity? _httpSecurity;
@@ -100,8 +102,7 @@ class _SignUpState extends State<SignUp> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
         children: <Widget>[
           title(),
           const SizedBox(
@@ -147,13 +148,14 @@ class _SignUpState extends State<SignUp> {
         child: TextField(
           controller: username,
           style: const TextStyle(fontSize: 14),
-          decoration: const InputDecoration(
-            hintText: "Set a username for your profile",
-            hintStyle: TextStyle(color: Colors.grey),
-            fillColor: Colors.white,
-            filled: true,
-            border: InputBorder.none,
-          ),
+          decoration: InputDecoration(
+              hintText: "Set a username for your profile",
+              hintStyle: TextStyle(color: Colors.grey),
+              fillColor: Colors.white,
+              filled: true,
+              border: InputBorder.none,
+              enabledBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         ));
   }
 
@@ -164,12 +166,15 @@ class _SignUpState extends State<SignUp> {
         child: TextField(
           controller: email,
           style: const TextStyle(fontSize: 14),
-          decoration: const InputDecoration(
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
               hintText: "Type your email",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: const TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
-              border: InputBorder.none),
+              border: InputBorder.none,
+              enabledBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         ));
   }
 
@@ -180,12 +185,23 @@ class _SignUpState extends State<SignUp> {
         child: TextField(
           controller: password,
           style: const TextStyle(fontSize: 14),
-          decoration: const InputDecoration(
+          obscureText: isPassword,
+          decoration: InputDecoration(
               hintText: "Type your password",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: const TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
-              border: InputBorder.none),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    isPassword = !isPassword;
+                  });
+                },
+                icon: const Icon(Icons.visibility),
+              ),
+              enabledBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         ));
   }
 
@@ -196,26 +212,38 @@ class _SignUpState extends State<SignUp> {
         child: TextField(
           controller: confirmPassword,
           style: const TextStyle(fontSize: 14),
-          decoration: const InputDecoration(
+          obscureText: isConfirmPassword,
+          decoration: InputDecoration(
               hintText: "Type your password again",
-              hintStyle: TextStyle(color: Colors.grey),
+              hintStyle: const TextStyle(color: Colors.grey),
               fillColor: Colors.white,
               filled: true,
-              border: InputBorder.none),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    isConfirmPassword = !isConfirmPassword;
+                  });
+                },
+                icon: const Icon(Icons.visibility),
+              ),
+              enabledBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
         ));
   }
 
   Container buttonSignUp() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      width: MediaQuery.of(context).size.width - 10,
+      width: MediaQuery.of(context).size.width,
+      height: 45,
       child: ElevatedButton(
         onPressed: () {
           initialize();
         },
         child: const Text(
           'Sign Up',
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 19),
         ),
       ),
     );
@@ -244,16 +272,23 @@ class _SignUpState extends State<SignUp> {
               isCheckboxV2 = newBool!;
             });
           }),
-      const Text('I have read and agree to the ',
-          style: TextStyle(color: Colors.white, fontSize: 12)),
-      const Text(
-        'Terms of service ',
-        style: TextStyle(color: Colors.red, fontSize: 13),
-      ),
-      const Text('& ', style: TextStyle(color: Colors.white, fontSize: 13)),
-      const Text(
-        'Privacy policy',
-        style: TextStyle(color: Colors.red, fontSize: 13),
+      Column(
+        children: [
+          Row(
+            children: const <Widget>[
+              Text('I have read and agree to the ',
+                  style: TextStyle(color: Colors.white, fontSize: 12)),
+              Text(
+                'Terms of service ',
+                style: TextStyle(color: Colors.red, fontSize: 13),
+              ),
+            ],
+          ),
+          const Text(
+            '& Privacy policy',
+            style: TextStyle(color: Colors.red, fontSize: 13),
+          ),
+        ],
       ),
     ]);
   }
