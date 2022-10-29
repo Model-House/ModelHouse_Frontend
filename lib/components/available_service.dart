@@ -59,14 +59,12 @@ class AvailableService extends StatelessWidget {
                         fontFamily: 'poppins-medium',
                         fontSize: 17),
                   ),
-                  Expanded(
-                    child: Text(
-                      post?.description == null ? '' : post!.description,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'poppins-ligth',
-                          fontSize: 15),
-                    ),
+                  Text(
+                    post?.description == null ? '' : post!.description,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'poppins-ligth',
+                        fontSize: 15),
                   ),
                   Text(
                     post?.category == null ? '' : post!.category,

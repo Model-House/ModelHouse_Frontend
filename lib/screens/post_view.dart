@@ -13,7 +13,9 @@ class PostView extends StatelessWidget {
         body: Center(
             child: Card(
                 child: Column(children: [
-      const Image(image: NetworkImage("https://i.ibb.co/FzWZp6s/image-60.png")),
+      const Image(
+          image: NetworkImage(
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HevEErtoeUbI6MM0GzgBKNYPd4hVTm7Jgg&usqp=CAU")),
       const Spacer(flex: 1),
       Text(post!.title,
           style: const TextStyle(color: Colors.amber, fontSize: 20)),

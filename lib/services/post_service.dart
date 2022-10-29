@@ -28,6 +28,7 @@ class HttpPost {
     try {
       var uri = Uri.parse(getByTitle);
       var response = await post.get(uri);
+      print(response.body);
       return postFromJson(response.body);
     } catch (e) {
       print("Error");
