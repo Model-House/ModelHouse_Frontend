@@ -13,7 +13,13 @@ class Routes extends StatelessWidget {
   const Routes(this.user, {Key? key, required this.index}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List<Widget> myList = [Home(), Search(), Message(), Notifi(), Menu(user)];
+    List<Widget> myList = [
+      Home(),
+      Search(user),
+      Message(),
+      Notifi(),
+      Menu(user)
+    ];
     return myList[index];
   }
 }

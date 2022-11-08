@@ -13,14 +13,16 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int index = 0;
   String name = "hols";
-  List? posts;
+  List<Post>? posts;
   HttpPost? _httpPost;
 
-  final Icon _icon = const Icon(
-    Icons.bathroom,
-    color: Color(0XFFF5CB5C),
-    size: 45,
-  );
+  Icon _icon() {
+    return const Icon(
+      Icons.bathroom,
+      color: Color(0XFFF5CB5C),
+      size: 45,
+    );
+  }
 
   @override
   void initState() {
@@ -84,9 +86,27 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: _icon),
-                        MaterialButton(onPressed: () {}, child: _icon),
-                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.roofing,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.door_back_door,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.park,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
                       ])),
               Container(
                   padding: const EdgeInsets.all(0),
@@ -94,9 +114,27 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: _icon),
-                        MaterialButton(onPressed: () {}, child: _icon),
-                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.bathroom,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.bathroom,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.bathroom,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
                       ])),
               Container(
                   padding: const EdgeInsets.all(0),
@@ -104,9 +142,27 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        MaterialButton(onPressed: () {}, child: _icon),
-                        MaterialButton(onPressed: () {}, child: _icon),
-                        MaterialButton(onPressed: () {}, child: _icon),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.bathroom,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.bathroom,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
+                        MaterialButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.bathroom,
+                              color: Color(0XFFF5CB5C),
+                              size: 45,
+                            )),
                       ])),
             ],
           ),

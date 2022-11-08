@@ -5,14 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:model_house/models/post.dart';
 
 class HttpPost {
-  final String urlBase = 'https://model-house.azurewebsites.net';
+  final String urlBase = 'https://localhost:7120';
   final String urlGetAll = '/api/v1/post/';
   final String urlGetUserId = '/api/v1/post/user/';
   String? userId;
   var post = http.Client();
 
   // ignore: body_might_complete_normally_nullable
-  Future<List?> getAllPost() async {
+  Future<List<Post>?> getAllPost() async {
     final String getAll = urlBase + urlGetAll;
     var uri = Uri.parse(getAll);
     var response = await post.get(uri);

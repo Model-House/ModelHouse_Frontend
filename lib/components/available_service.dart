@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../models/post.dart';
+import '../models/user.dart';
 import '../screens/post_view.dart';
 
 class AvailableService extends StatelessWidget {
   List? posts;
-  AvailableService(this.posts);
+  User? user;
+  AvailableService(this.user, this.posts);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class AvailableService extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return PostView(post);
+              return PostView(user, post);
             },
           ),
         );
