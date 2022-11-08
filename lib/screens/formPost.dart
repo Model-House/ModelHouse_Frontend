@@ -27,13 +27,13 @@ class _FormPostState extends State<FormPost> {
     return InputDecoration(
         fillColor: Colors.white,
         filled: true,
-        hintText: message,
+        labelText: message,
         border: OutlineInputBorder(
             borderSide: const BorderSide(color: Color(0xffEBDCFA)),
-            borderRadius: BorderRadius.circular(40)),
+            borderRadius: BorderRadius.circular(15)),
         enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Color(0xffEBDCFA)),
-            borderRadius: BorderRadius.circular(40)));
+            borderRadius: BorderRadius.circular(15)));
   }
 
   void initState() {
@@ -106,41 +106,43 @@ class _FormPostState extends State<FormPost> {
           child: Container(
               child: ListView(
             children: [
-              Padding(
+              Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(
                     controller: title, decoration: decorationInput("Title")),
               ),
-              Padding(
+              Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(
                     keyboardType: TextInputType.phone,
                     controller: price,
                     decoration: decorationInput("Price")),
               ),
-              Padding(
+              Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(
                     controller: category,
                     decoration: decorationInput("Category")),
               ),
-              Padding(
+              Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(
                     controller: location,
                     decoration: decorationInput("Location")),
               ),
-              Padding(
+              Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                height: 24 * 6,
                 child: TextField(
+                    maxLines: 6,
                     controller: description,
                     decoration: decorationInput("Description")),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 decoration: BoxDecoration(
                     color: const Color(0xff007AFF),
-                    borderRadius: BorderRadius.circular(40)),
+                    borderRadius: BorderRadius.circular(15)),
                 width: MediaQuery.of(context).size.width,
                 height: 50,
                 child: MaterialButton(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/components/available_service.dart';
 
+import '../models/user.dart';
 import '../services/post_service.dart';
 
 class Search extends StatefulWidget {
+  final User? user;
+  Search(this.user);
   @override
   State<Search> createState() => _SearchState();
 }
@@ -42,7 +45,7 @@ class _SearchState extends State<Search> {
                 searchInput(context)
               ]),
         ),
-        AvailableService(post)
+        AvailableService(widget.user, post)
       ],
     );
   }
