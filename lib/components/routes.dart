@@ -17,7 +17,7 @@ class Routes extends StatelessWidget {
       Home(),
       Search(user),
       Message(),
-      Notifi(),
+      Notifica(user),
       Menu(user)
     ];
     return myList[index];

@@ -3,8 +3,10 @@ import 'package:model_house/screens/interest.dart';
 import 'package:model_house/screens/place_api.dart';
 import 'package:model_house/screens/signup.dart';
 import 'package:model_house/services/security_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
+import '../services/notification_service.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -26,11 +28,19 @@ class _SignInState extends State<SignIn> {
     super.initState();
   }
 
+  Future login() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('id', user!.id);
+    prefs.setString('username', user!.username);
+    prefs.setString('email', user!.email);
+  }
+
   Future initialize() async {
     user = await _httpSecurity?.signIn(email.text, password.text);
     setState(() {
       user = user;
       if (user?.username != null) {
+        login();
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (BuildContext context) {

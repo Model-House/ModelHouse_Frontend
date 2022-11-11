@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class HttpSecurity {
-  final String urlBase = 'https://localhost:7120';
+  final String urlBase = 'https://model-house.azurewebsites.net';
   final String urlSignIn = '/api/v1/users/sign-in';
   final String urlSignUp = '/api/v1/users/sign-up';
   String? userId;

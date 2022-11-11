@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/signupchoice.dart';
+import 'package:model_house/services/notification_service.dart';
 
 class SessionOptions extends StatefulWidget {
   const SessionOptions({super.key});
@@ -10,6 +11,11 @@ class SessionOptions extends StatefulWidget {
 }
 
 class _SessionOptionsState extends State<SessionOptions> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
