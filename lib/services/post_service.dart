@@ -1,11 +1,10 @@
-import 'dart:io';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:model_house/models/post.dart';
 
 class HttpPost {
-  final String urlBase = 'https://localhost:7120';
+  final String urlBase = 'https://model-house.azurewebsites.net';
   final String urlGetAll = '/api/v1/post/';
   final String urlGetUserId = '/api/v1/post/user/';
   String? userId;

@@ -3,7 +3,7 @@ import 'package:model_house/models/order.dart';
 import 'package:http/http.dart' as http;
 
 class HttpOrder {
-  final String urlBase = 'https://localhost:7120';
+  final String urlBase = 'https://model-house.azurewebsites.net';
   final String urlGetAll = '/api/v1/order/';
   final String urlGetUserId = '/api/v1/order/user/';
   String? userId;

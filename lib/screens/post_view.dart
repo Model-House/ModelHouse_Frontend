@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:model_house/screens/formOrder.dart';
 import 'package:model_house/services/order_service.dart';
+import 'package:model_house/services/service_notification.dart';
 
+import '../models/notification.dart';
 import '../models/order.dart';
 import '../models/post.dart';
 import '../models/user.dart';
+import '../services/notification_service.dart';
 
 class PostView extends StatefulWidget {
   final Post? post;
@@ -20,12 +21,26 @@ class _PostViewState extends State<PostView> {
   final title = TextEditingController();
   final description = TextEditingController();
   HttpOrder? _httpOrder;
+  HttpNotificationOrder? _httpNotification;
   Order? order1;
   Order? order2;
+  Notifi? notification1;
+  Notifi? notification2;
+  late final NotificationService service;
 
   void initState() {
     _httpOrder = HttpOrder();
+    _httpNotification = HttpNotificationOrder();
+    service = NotificationService(context);
+    service.intialize();
     super.initState();
+  }
+
+  Future createNotification() async {
+    notification1 = await _httpNotification?.postValueNotification(
+        title.text, description.text, widget.post!.userId);
+    notification2 = await _httpNotification?.postValueNotification(
+        title.text, description.text, widget.user!.id);
   }
 
   Future initialize() async {
@@ -33,10 +48,12 @@ class _PostViewState extends State<PostView> {
         widget.post!.userId, widget.post!.id, widget.user!.id);
     order2 = await _httpOrder?.postValueOrder(title.text, description.text,
         widget.user!.id, widget.post!.id, widget.post!.userId);
+
     setState(() {
       order1 = order1;
       order2 = order2;
       if (order1?.title != null && order2?.title != null) {
+        createNotification();
         showDialog(
             barrierDismissible: false,
             context: context,
@@ -49,6 +66,10 @@ class _PostViewState extends State<PostView> {
                         Navigator.pop(context);
                         title.text = "";
                         description.text = "";
+                        service.showNotificationWithActions(
+                            id: 0,
+                            title: "You have a new Order",
+                            body: "you made a new shipment of Order");
                       },
                       child: const Text("Ok"))
                 ],

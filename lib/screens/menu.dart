@@ -3,6 +3,7 @@ import 'package:model_house/screens/formPost.dart';
 import 'package:model_house/screens/list_orders.dart';
 import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/yourPost.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
 
@@ -287,11 +288,19 @@ class Menu extends StatelessWidget {
         ));
   }
 
+  Future logOut() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('id');
+    prefs.remove('username');
+    prefs.remove('email');
+  }
+
   Widget _log_out(context) {
     return Padding(
         padding: const EdgeInsets.all(5),
         child: MaterialButton(
           onPressed: () {
+            logOut();
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
