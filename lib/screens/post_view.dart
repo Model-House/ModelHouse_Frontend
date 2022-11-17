@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/models/Contact.dart';
+import 'package:model_house/services/contact_service.dart';
 import 'package:model_house/services/order_service.dart';
 import 'package:model_house/services/service_notification.dart';
 
@@ -22,15 +24,21 @@ class _PostViewState extends State<PostView> {
   final description = TextEditingController();
   HttpOrder? _httpOrder;
   HttpNotificationOrder? _httpNotification;
+  HttpContact? _httpContact;
   Order? order1;
   Order? order2;
+  Contact? contact1;
+  Contact? contact2;
   Notifi? notification1;
   Notifi? notification2;
+  Notifi? notification3;
+  Notifi? notification4;
   late final NotificationService service;
 
   void initState() {
     _httpOrder = HttpOrder();
     _httpNotification = HttpNotificationOrder();
+    _httpContact = HttpContact();
     service = NotificationService(context);
     service.intialize();
     super.initState();
@@ -43,15 +51,31 @@ class _PostViewState extends State<PostView> {
         title.text, description.text, widget.user!.id);
   }
 
+  Future createNotificationContact() async {
+    notification3 = await _httpNotification?.postValueNotification(
+        "New contact",
+        "you may already have a new contact",
+        widget.post!.userId);
+    notification4 = await _httpNotification?.postValueNotification(
+        "New contact", "you may already have a new contact", widget.user!.id);
+  }
+
   Future initialize() async {
     order1 = await _httpOrder?.postValueOrder(title.text, description.text,
         widget.post!.userId, widget.post!.id, widget.user!.id);
     order2 = await _httpOrder?.postValueOrder(title.text, description.text,
         widget.user!.id, widget.post!.id, widget.post!.userId);
-
+    print("hola1");
+    contact1 = await _httpContact?.postValueContact(
+        widget.post!.userId, widget.user!.username, widget.user!.id);
+    contact2 = await _httpContact?.postValueContact(
+        widget.user!.id, widget.user!.username, widget.post!.userId);
+    print("hola2");
     setState(() {
       order1 = order1;
       order2 = order2;
+      contact1 = contact1;
+      contact2 = contact2;
       if (order1?.title != null && order2?.title != null) {
         createNotification();
         showDialog(
@@ -70,6 +94,13 @@ class _PostViewState extends State<PostView> {
                             id: 0,
                             title: "You have a new Order",
                             body: "you made a new shipment of Order");
+                        if (contact1?.user != null && contact2?.user != null) {
+                          createNotificationContact();
+                          service.showNotificationWithActions(
+                              id: 0,
+                              title: "New contact",
+                              body: "you may already have a new contact");
+                        }
                       },
                       child: const Text("Ok"))
                 ],
@@ -121,9 +152,7 @@ class _PostViewState extends State<PostView> {
         body: Container(
             padding: const EdgeInsets.all(15),
             child: ListView(children: [
-              const Image(
-                  image: NetworkImage(
-                      "https://st2.depositphotos.com/2235295/7169/i/450/depositphotos_71697893-stock-photo-blueprints-and-safety-helmet-over.jpg")),
+              Image.network(widget.post!.foto),
               const SizedBox(
                 height: 15,
               ),

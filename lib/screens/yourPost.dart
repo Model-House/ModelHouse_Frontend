@@ -44,6 +44,9 @@ class _YourPostState extends State<YourPost> {
             itemBuilder: ((context, index) {
               return Card(
                 child: ListTile(
+                  leading: Image(
+                    image: NetworkImage(posts?[index].foto),
+                  ),
                   title: Text(posts?[index].title),
                   subtitle: Text(posts?[index].description),
                 ),

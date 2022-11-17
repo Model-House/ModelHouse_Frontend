@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/screens/editProfile.dart';
 import 'package:model_house/screens/formPost.dart';
 import 'package:model_house/screens/list_orders.dart';
 import 'package:model_house/screens/signin.dart';
@@ -6,10 +7,18 @@ import 'package:model_house/screens/yourPost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
+import '../services/security_service.dart';
 
-class Menu extends StatelessWidget {
-  final User? user;
-  const Menu(this.user, {super.key});
+class Menu extends StatefulWidget {
+  User? user;
+  Menu(this.user, {super.key});
+
+  @override
+  State<Menu> createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+  HttpSecurity? _httpSecurity;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +33,21 @@ class Menu extends StatelessWidget {
         _log_out(context)
       ],
     );
+  }
+
+  @override
+  void initState() {
+    _httpSecurity = HttpSecurity();
+    initialize();
+    super.initState();
+  }
+
+  Future initialize() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('isChange') == true) {
+      widget.user = await _httpSecurity?.getUser();
+      prefs.setBool('isChange', false);
+    }
   }
 
   Widget _post(context) {
@@ -50,7 +74,7 @@ class Menu extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => FormPost(user)));
+                        builder: (context) => FormPost(widget.user)));
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -80,7 +104,7 @@ class Menu extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => YourPost(user)));
+                        builder: (context) => YourPost(widget.user)));
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -190,7 +214,7 @@ class Menu extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ListOrders(user)));
+                        builder: (context) => ListOrders(widget.user)));
                   },
                   child: Container(
                     decoration: const BoxDecoration(
@@ -248,7 +272,15 @@ class Menu extends StatelessWidget {
 
   Widget _user(context) {
     return MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return EditProfile(widget.user);
+              },
+            ),
+          );
+        },
         child: Container(
           decoration: BoxDecoration(
               color: const Color(0XFF161A1D),
@@ -256,26 +288,30 @@ class Menu extends StatelessWidget {
               border: Border.all(color: const Color(0xffE0E1DD), width: 3.5)),
           child: Row(
             children: <Widget>[
-              const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Icon(
-                    Icons.account_circle,
-                    color: Colors.white,
-                    size: 60.0,
-                  )),
+              widget.user!.image == "image"
+                  ? const Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Icon(
+                        Icons.account_circle,
+                        color: Colors.white,
+                        size: 60.0,
+                      ))
+                  : Image.network(widget.user!.image, width: 60, height: 60),
               Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Column(
                     children: <Widget>[
                       Text(
-                        user?.username == null ? '' : user!.username,
+                        widget.user?.username == null
+                            ? ''
+                            : widget.user!.username,
                         style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'archivo',
                             fontSize: 18.0),
                       ),
                       Text(
-                        user?.email == null ? '' : user!.email,
+                        widget.user?.email == null ? '' : widget.user!.email,
                         style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'archivo',

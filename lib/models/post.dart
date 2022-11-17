@@ -15,6 +15,7 @@ class Post {
   String category;
   String location;
   String description;
+  String foto;
   int userId;
   Post({
     required this.id,
@@ -23,6 +24,7 @@ class Post {
     required this.category,
     required this.location,
     required this.description,
+    required this.foto,
     required this.userId,
   });
 
@@ -33,6 +35,7 @@ class Post {
         category: json["category"],
         location: json["location"],
         description: json["description"],
+        foto: json["foto"],
         userId: json["userId"],
       );
   Map<String, dynamic> toJson() => {
@@ -42,6 +45,7 @@ class Post {
         "category": category,
         "location": location,
         "description": description,
+        "foto": foto,
         "userId": userId,
       };
 }

@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
   carousel_slider: ^2.2.1
   flutter_local_notifications: 12.0.3
+  image_picker: ^0.8.6
   #stream_chat_flutter: ^2.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -40,6 +41,7 @@ dependencies:
   firebase_auth: ^4.1.1
   http: ^0.13.5
   provider: ^5.0.0
+  mime: ^1.0.2
   firebase_core: ^2.1.1
   google_sign_in: ^5.4.2
   shared_preferences: ^2.0.15

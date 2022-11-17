@@ -33,6 +33,9 @@ class _SignInState extends State<SignIn> {
     prefs.setInt('id', user!.id);
     prefs.setString('username', user!.username);
     prefs.setString('email', user!.email);
+    prefs.setString('image', user!.image);
+    prefs.setString('phone', user!.phone);
+    prefs.setBool('isChange', false);
   }
 
   Future initialize() async {

@@ -20,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   SharedPreferences? prefs;
 
   int? id;
-  User user = User(id: 0, username: "", email: "", token: "");
+  User user =
+      User(id: 0, image: "", phone: "", username: "", email: "", token: "");
 
   @override
   void initState() {
@@ -52,6 +53,8 @@ class _MyAppState extends State<MyApp> {
       user.id = prefs!.getInt('id')!;
       user.username = prefs!.getString('username')!;
       user.email = prefs!.getString('email')!;
+      user.image = prefs!.getString('image')!;
+      user.phone = prefs!.getString('phone')!;
       print(user.id);
     });
   }

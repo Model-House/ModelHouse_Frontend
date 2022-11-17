@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:model_house/models/post.dart';
 import 'package:model_house/services/post_service.dart';
 
@@ -15,6 +19,8 @@ class FormPost extends StatefulWidget {
 }
 
 class _FormPostState extends State<FormPost> {
+  String? imagePath;
+  String? imagen64;
   final title = TextEditingController();
   final price = TextEditingController();
   final category = TextEditingController();
@@ -42,8 +48,16 @@ class _FormPostState extends State<FormPost> {
   }
 
   Future initialize() async {
-    post = await _httpPost?.postValuePost(title.text, int.parse(price.text),
-        category.text, location.text, description.text, widget.user!.id);
+    //List<int> bytes = File(imagePath!).readAsBytesSync();
+    //imagen64 = base64.encode(bytes);
+    var post = await _httpPost?.PathPost(
+        title.text,
+        int.parse(price.text),
+        category.text,
+        location.text,
+        description.text,
+        widget.user!.id,
+        imagePath!);
     setState(() {
       post = post;
       if (post?.title != null) {
@@ -106,6 +120,23 @@ class _FormPostState extends State<FormPost> {
           child: Container(
               child: ListView(
             children: [
+              MaterialButton(
+                onPressed: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  PickedFile? _pickedFile =
+                      await _picker.getImage(source: ImageSource.gallery);
+                  setState(() {
+                    imagePath = _pickedFile?.path;
+                  });
+                },
+                child: Column(
+                  children: const <Widget>[
+                    Icon(Icons.add_a_photo),
+                    Text("Add A Photo")
+                  ],
+                ),
+              ),
+              (imagePath == null) ? Container() : Image.file(File(imagePath!)),
               Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(

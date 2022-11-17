@@ -2,10 +2,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:model_house/models/post.dart';
+import 'package:model_house/screens/post_view.dart';
+import 'package:model_house/services/security_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/user.dart';
 import '../services/post_service.dart';
 
 class Home extends StatefulWidget {
+  User? user;
+  Home(this.user);
+
   @override
   State<Home> createState() => _HomeState();
 }
@@ -27,6 +34,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     _httpPost = HttpPost();
+
     initialize();
     super.initState();
   }
@@ -171,39 +179,49 @@ class _HomeState extends State<Home> {
       ],
     );
   }
-}
 
-Widget TopPosts(List? posts) {
-  return Expanded(
-    child: ListView.builder(
-        itemCount: posts?.length,
-        itemBuilder: (context, index) {
-          return item_service(posts?[index]);
-        }),
-  );
-}
+  Widget TopPosts(List? posts) {
+    return Expanded(
+      child: ListView.builder(
+          itemCount: posts?.length,
+          itemBuilder: (context, index) {
+            return item_service(posts?[index]);
+          }),
+    );
+  }
 
-Widget item_service(Post post) {
-  return Container(
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color(0xff161A1D)),
-    padding: const EdgeInsets.all(10),
-    margin: const EdgeInsets.all(10),
-    child: Row(
-      children: [
-        SizedBox(
-          height: 100,
-          width: 100,
-          child: Image.network(
-              'https://definicion.de/wp-content/uploads/2014/03/remodelacion.jpg'),
+  Widget item_service(Post post) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color(0xff161A1D)),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return PostView(widget.user, post);
+              },
+            ),
+          );
+        },
+        child: Row(
+          children: [
+            SizedBox(
+              height: 100,
+              width: 100,
+              child: Image.network(post.foto),
+            ),
+            Expanded(
+                child: Text(
+              post.description,
+              style: const TextStyle(color: Colors.white),
+            ))
+          ],
         ),
-        Expanded(
-            child: Text(
-          post.description,
-          style: const TextStyle(color: Colors.white),
-        ))
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }
