@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/signupchoice.dart';
+import 'package:model_house/services/notification_service.dart';
 
 class SessionOptions extends StatefulWidget {
   const SessionOptions({super.key});
@@ -11,20 +12,25 @@ class SessionOptions extends StatefulWidget {
 
 class _SessionOptionsState extends State<SessionOptions> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: body(), 
+      body: body(),
     );
   }
 
-Widget body() {
-  return Container(
-    decoration: const BoxDecoration(
-      image: DecorationImage(
-        image: AssetImage("images/fondo1.jpg"),
-        fit: BoxFit.cover,
+  Widget body() {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("images/fondo1.jpg"),
+          fit: BoxFit.cover,
+        ),
       ),
-    ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -33,55 +39,72 @@ Widget body() {
           buttons()
         ],
       ),
-  );
-}
+    );
+  }
 
   Container title() {
     return Container(
-      padding: const EdgeInsets.all(20),
-      child: const Text("Sign In to continue", style: TextStyle(color: Colors.white, fontSize: 48.0, fontWeight: FontWeight.bold),
-      textAlign: TextAlign.center,
-    ));
+        padding: const EdgeInsets.all(20),
+        child: const Text(
+          "Sign In to continue",
+          style: TextStyle(
+              color: Colors.white, fontSize: 48.0, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ));
   }
 
- Container buttons() {
+  Widget buttons() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 80),
-      width: MediaQuery.of(context).size.width - 10,
-      child: Row (
+      padding: const EdgeInsets.all(12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-              MaterialPageRoute(
-              builder: (BuildContext context) {
-                return const SignUpChoice();
+          Container(
+            width: 120,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const SignUpChoice();
+                    },
+                  ),
+                );
               },
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 20),
               ),
-              );
-            }, 
-            child: const Text('Sign Up',
-            style: TextStyle(fontSize: 20),),
+            ),
           ),
           const SizedBox(
-          width: 55,
+            width: 40,
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-              MaterialPageRoute(
-              builder: (BuildContext context) {
-                return const SignIn();
+          Container(
+            width: 120,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const SignIn();
+                    },
+                  ),
+                );
               },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white),
               ),
-              );
-            }, 
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
-            child: const Text('Sign In',
-            style: TextStyle(fontSize: 20, color: Colors.black),),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(fontSize: 20, color: Colors.black),
+              ),
+            ),
           ),
-        ]
-      )
+        ],
+      ),
     );
   }
 }

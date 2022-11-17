@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:model_house/models/post.dart';
 import 'package:model_house/services/post_service.dart';
 
@@ -15,32 +19,91 @@ class FormPost extends StatefulWidget {
 }
 
 class _FormPostState extends State<FormPost> {
+  String? imagePath;
+  String? imagen64;
   final title = TextEditingController();
   final price = TextEditingController();
   final category = TextEditingController();
   final location = TextEditingController();
   final description = TextEditingController();
   HttpPost? _httpPost;
+  Post? post;
 
-  InputDecoration decoratioInput = InputDecoration(
-      fillColor: Colors.white,
-      border: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xffEBDCFA)),
-          borderRadius: BorderRadius.circular(40)),
-      enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xffEBDCFA)),
-          borderRadius: BorderRadius.circular(40)));
+  InputDecoration decorationInput(String message) {
+    return InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        labelText: message,
+        border: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEBDCFA)),
+            borderRadius: BorderRadius.circular(15)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Color(0xffEBDCFA)),
+            borderRadius: BorderRadius.circular(15)));
+  }
 
-  final post = Post(
-      price: 15,
-      title: "title",
-      category: "category",
-      location: "location",
-      description: "description",
-      userId: 1);
+  void initState() {
+    _httpPost = HttpPost();
+    super.initState();
+  }
 
   Future initialize() async {
-    _httpPost?.postValuePost(post);
+    //List<int> bytes = File(imagePath!).readAsBytesSync();
+    //imagen64 = base64.encode(bytes);
+    var post = await _httpPost?.PathPost(
+        title.text,
+        int.parse(price.text),
+        category.text,
+        location.text,
+        description.text,
+        widget.user!.id,
+        imagePath!);
+    setState(() {
+      post = post;
+      if (post?.title != null) {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("The post was created successfully"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        title.text = "";
+                        price.text = "";
+                        category.text = "";
+                        location.text = "";
+                        description.text = "";
+                      },
+                      child: const Text("Ok"))
+                ],
+              );
+            });
+      } else {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Something went wrong"),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        title.text = "";
+                        price.text = "";
+                        category.text = "";
+                        location.text = "";
+                        description.text = "";
+                      },
+                      child: const Text("Ok"))
+                ],
+              );
+            });
+      }
+    });
   }
 
   @override
@@ -49,52 +112,72 @@ class _FormPostState extends State<FormPost> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: const Text("Create Post"),
-        backgroundColor: Color(0xff007AFF),
+        backgroundColor: const Color(0xff007AFF),
       ),
       body: Padding(
           padding: const EdgeInsets.all(30),
           // ignore: avoid_unnecessary_containers
           child: Container(
-              child: Column(
+              child: ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: TextField(controller: title, decoration: decoratioInput),
+              MaterialButton(
+                onPressed: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  PickedFile? _pickedFile =
+                      await _picker.getImage(source: ImageSource.gallery);
+                  setState(() {
+                    imagePath = _pickedFile?.path;
+                  });
+                },
+                child: Column(
+                  children: const <Widget>[
+                    Icon(Icons.add_a_photo),
+                    Text("Add A Photo")
+                  ],
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: TextField(controller: price, decoration: decoratioInput),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child:
-                    TextField(controller: category, decoration: decoratioInput),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child:
-                    TextField(controller: location, decoration: decoratioInput),
-              ),
-              Padding(
+              (imagePath == null) ? Container() : Image.file(File(imagePath!)),
+              Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(
-                    controller: description, decoration: decoratioInput),
+                    controller: title, decoration: decorationInput("Title")),
               ),
               Container(
-                margin: const EdgeInsets.all(25),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: TextField(
+                    keyboardType: TextInputType.phone,
+                    controller: price,
+                    decoration: decorationInput("Price")),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: TextField(
+                    controller: category,
+                    decoration: decorationInput("Category")),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: TextField(
+                    controller: location,
+                    decoration: decorationInput("Location")),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                height: 24 * 6,
+                child: TextField(
+                    maxLines: 6,
+                    controller: description,
+                    decoration: decorationInput("Description")),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 decoration: BoxDecoration(
                     color: const Color(0xff007AFF),
-                    borderRadius: BorderRadius.circular(40)),
-                width: 100,
+                    borderRadius: BorderRadius.circular(15)),
+                width: MediaQuery.of(context).size.width,
+                height: 50,
                 child: MaterialButton(
-                  onPressed: () => {
-                    post.title = title.text,
-                    post.location = category.text,
-                    post.location = location.text,
-                    post.description = description.text,
-                    post.userId = widget.user!.id,
-                    HttpPost().postValuePost(post),
-                  },
+                  onPressed: () => {initialize()},
                   child: const Text(
                     'Publish',
                     style: TextStyle(color: Colors.white, fontSize: 18),
