@@ -32,20 +32,53 @@ class _NotifiState extends State<Notifica> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(15),
-        child: ListView.builder(
-            itemCount: notifications == null ? 0 : notifications?.length,
-            itemBuilder: ((context, index) {
-              return Card(
-                child: ListTile(
-                  title: Text(
-                      notifications == null ? 0 : notifications?[index].title),
-                  subtitle: Text(notifications == null
-                      ? 0
-                      : notifications?[index].description),
-                ),
-              );
-            })));
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+            child: Text(
+              "Notification",
+              style: TextStyle(color: Colors.white, fontSize: 35),
+            ),
+          ),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+            child: ListView.builder(
+                itemCount: notifications == null ? 0 : notifications?.length,
+                itemBuilder: ((context, index) {
+                  return Container(
+                    margin: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                    decoration: BoxDecoration(
+                        color: Color(0XFF30363B),
+                        borderRadius: BorderRadius.circular(12)),
+                    child: ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 5, 0, 10),
+                        child: Text(
+                          notifications == null
+                              ? 0
+                              : notifications?[index].title,
+                          style: TextStyle(color: Colors.white, fontSize: 24),
+                        ),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.fromLTRB(6, 5, 0, 10),
+                        child: Text(
+                          notifications == null
+                              ? 0
+                              : notifications?[index].description,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  );
+                })),
+          )),
+        ],
+      ),
+    );
   }
 }
