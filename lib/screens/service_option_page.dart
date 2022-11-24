@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/option.dart';
 import 'package:model_house/models/service-op.dart';
+import 'package:model_house/models/user.dart';
 import 'package:model_house/services/service_service.dart';
 
 class ServiceOptionPage extends StatefulWidget {
-  const ServiceOptionPage({super.key});
+  final User? user;
+  const ServiceOptionPage(this.user, {super.key});
 
   @override
   State<ServiceOptionPage> createState() => _ServiceOptionPageState();
@@ -17,13 +19,14 @@ class _ServiceOptionPageState extends State<ServiceOptionPage> {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
       appBar: appbarOptions(context, const Color(0xff74806D), 'S', 'ervice'),
-      body: const ServiceOptions(),
+      body: ServiceOptions(widget.user),
     );
   }
 }
 
 class ServiceOptions extends StatefulWidget {
-  const ServiceOptions({super.key});
+  final User? user;
+  const ServiceOptions(this.user, {super.key});
 
   @override
   State<ServiceOptions> createState() => _ServiceOptionsState();
@@ -41,7 +44,7 @@ class _ServiceOptionsState extends State<ServiceOptions> {
   }
 
   getData() async {
-    posts = await ServiceService().getPosts();
+    posts = await ServiceService().getPostsByUserId(widget.user!.id);
     if (posts != null) {
       setState(() {
         isLoaded = true;
@@ -75,7 +78,8 @@ class _ServiceOptionsState extends State<ServiceOptions> {
               onTap: () {
                 setState(() {
                   posts![index].check = !posts![index].check;
-                  ServiceService().updatePosts(index, posts![index].check);
+                  ServiceService()
+                      .updatePosts(index, posts![index].check, widget.user!.id);
                 });
                 debugPrint('${posts![index].check}');
               },

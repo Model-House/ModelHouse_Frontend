@@ -194,9 +194,9 @@ class _HomeState extends State<Home> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color(0xff161A1D)),
+          color: const Color(0XFF30363B)),
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.fromLTRB(10, 15, 10, 15),
       child: MaterialButton(
         onPressed: () {
           Navigator.of(context).push(
@@ -209,15 +209,48 @@ class _HomeState extends State<Home> {
         },
         child: Row(
           children: [
-            SizedBox(
-              height: 100,
-              width: 100,
-              child: Image.network(post.foto),
+            Container(
+              padding: EdgeInsets.fromLTRB(5, 5, 15, 5),
+              child: Image.network(
+                post.foto,
+                width: 100,
+              ),
             ),
             Expanded(
-                child: Text(
-              post.description,
-              style: const TextStyle(color: Colors.white),
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 18),
+                  child: Text(
+                    post.title,
+                    style: const TextStyle(
+                      color: Color(0XFFE43848),
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  child: Text(
+                    post.description,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Price: S/.",
+                      style: TextStyle(color: Color(0XFFE43848), fontSize: 18),
+                    ),
+                    Text(
+                      post.price.toString(),
+                      style: const TextStyle(
+                          color: Color(0XFFE43848), fontSize: 18),
+                    ),
+                  ],
+                ),
+              ],
             ))
           ],
         ),

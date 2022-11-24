@@ -26,6 +26,20 @@ class HttpSecurity {
     }
   }
 
+  Future<User?> getEmail(String s) async {
+    final String postUrl = urlBase + users + 'find/$s';
+    var uri = Uri.parse(postUrl);
+    var response = await user.get(uri, headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      "Accept": "application/json"
+    });
+    try {
+      return User.fromJson(jsonDecode(response.body));
+    } catch (e) {
+      print("Error");
+    }
+  }
+
   // ignore: body_might_complete_normally_nullable
   Future<User?> signIn(String email, String password) async {
     final String postUrl = urlBase + urlSignIn;

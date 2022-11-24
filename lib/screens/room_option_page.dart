@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:model_house/components/appbar_options.dart';
 import 'package:model_house/models/room.dart';
+import 'package:model_house/models/user.dart';
 import 'package:model_house/services/room_service.dart';
 
 class RoomOptionPage extends StatefulWidget {
-  const RoomOptionPage({super.key});
+  final User? user;
+  RoomOptionPage(this.user, {super.key});
 
   @override
   State<RoomOptionPage> createState() => _RoomOptionPageState();
@@ -16,13 +18,14 @@ class _RoomOptionPageState extends State<RoomOptionPage> {
     return Scaffold(
       backgroundColor: const Color(0xff1C1C1C),
       appBar: appbarOptions(context, const Color(0xff457DE9), 'R', 'oom'),
-      body: const RoomOptions(),
+      body: RoomOptions(widget.user),
     );
   }
 }
 
 class RoomOptions extends StatefulWidget {
-  const RoomOptions({super.key});
+  final User? user;
+  const RoomOptions(this.user, {super.key});
 
   @override
   State<RoomOptions> createState() => _RoomOptionsState();
@@ -40,7 +43,7 @@ class _RoomOptionsState extends State<RoomOptions> {
   }
 
   getData() async {
-    posts = await RoomService().getPosts();
+    posts = await RoomService().getPostsByUserId(widget.user!.id);
     if (posts != null) {
       setState(() {
         isLoaded = true;
@@ -74,7 +77,8 @@ class _RoomOptionsState extends State<RoomOptions> {
               onTap: () {
                 setState(() {
                   posts![index].check = !posts![index].check;
-                  RoomService().updatePosts(index, posts![index].check);
+                  RoomService()
+                      .updatePosts(index, posts![index].check, widget.user!.id);
                 });
                 debugPrint('${posts![index].check}');
               },

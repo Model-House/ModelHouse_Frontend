@@ -36,8 +36,10 @@ class HttppMessage {
   }
 
   // ignore: body_might_complete_normally_nullable|
-  Future<List<Message>?> getMessageByUserId(String id) async {
-    final String getByUserId = urlBase + urlGetUserId + id;
+  Future<List<Message>?> getMessageByUserId(
+      String contactId, String userId) async {
+    final String getByUserId =
+        urlBase + urlGetUserId + contactId + "/user/" + userId;
     var uri = Uri.parse(getByUserId);
     var response = await message.get(uri);
     if (response.statusCode == 200) {
@@ -47,11 +49,11 @@ class HttppMessage {
   }
 
   // ignore: body_might_complete_normally_nullable
-  Future<Message?> postValueMessage(
-      String content, String shippingTime, bool isMe, int contactId) async {
+  Future<Message?> postValueMessage(String content, String shippingTime,
+      bool isMe, int contactId, int userId) async {
     final String messageUrl = urlBase + urlGetAll;
     var uri = Uri.parse(messageUrl);
-    print(messageUrl);
+    print(contactId);
     var response = await message.post(uri,
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
@@ -61,7 +63,8 @@ class HttppMessage {
           'content': content,
           'shippingTime': shippingTime,
           'isMe': isMe,
-          'contactId': contactId
+          'contactId': contactId,
+          'userId': userId
         }));
     print(response.body);
     if (response.statusCode == 200) {

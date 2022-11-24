@@ -24,11 +24,12 @@ class _NavigationState extends State<Navigation> {
         });
       },
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: const Color(0XFFFF0080),
+      selectedItemColor: const Color(0XFFE43848),
       unselectedItemColor: Colors.white,
-      iconSize: 30.0,
-      selectedFontSize: 12.0,
-      backgroundColor: Theme.of(context).accentColor,
+      iconSize: 35.0,
+      selectedFontSize: 18.0,
+      unselectedFontSize: 14,
+      backgroundColor: Color(0XFF30363B),
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),

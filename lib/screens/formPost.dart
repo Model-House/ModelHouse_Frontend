@@ -23,11 +23,40 @@ class _FormPostState extends State<FormPost> {
   String? imagen64;
   final title = TextEditingController();
   final price = TextEditingController();
-  final category = TextEditingController();
+  String? category;
   final location = TextEditingController();
   final description = TextEditingController();
   HttpPost? _httpPost;
   Post? post;
+  final List<String> services = [
+    'Windows',
+    'Floors',
+    'Exterior',
+    'Drywall',
+    'Door',
+    'Ceilings',
+    'Attic',
+    'Bathroom',
+    'Deck & Patio',
+    'Garage',
+    'Bedroom',
+    'Office',
+    'Basement',
+    'Kitchen',
+    'Living Room',
+    'Installation',
+    'Maintenance',
+    'Painting',
+    'Plumbing',
+    'Repair',
+    'Electrical',
+    'Assembly',
+    'Safety & Mobility'
+  ];
+  final TextStyle inputStyle = TextStyle(
+    fontSize: 20,
+    color: Colors.blue[900],
+  );
 
   InputDecoration decorationInput(String message) {
     return InputDecoration(
@@ -53,7 +82,7 @@ class _FormPostState extends State<FormPost> {
     var post = await _httpPost?.PathPost(
         title.text,
         int.parse(price.text),
-        category.text,
+        category!,
         location.text,
         description.text,
         widget.user!.id,
@@ -73,7 +102,6 @@ class _FormPostState extends State<FormPost> {
                         Navigator.pop(context);
                         title.text = "";
                         price.text = "";
-                        category.text = "";
                         location.text = "";
                         description.text = "";
                       },
@@ -94,7 +122,6 @@ class _FormPostState extends State<FormPost> {
                         Navigator.pop(context);
                         title.text = "";
                         price.text = "";
-                        category.text = "";
                         location.text = "";
                         description.text = "";
                       },
@@ -122,18 +149,33 @@ class _FormPostState extends State<FormPost> {
             children: [
               MaterialButton(
                 onPressed: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  PickedFile? _pickedFile =
-                      await _picker.getImage(source: ImageSource.gallery);
+                  final ImagePicker picker = ImagePicker();
+                  PickedFile? pickedFile =
+                      // ignore: deprecated_member_use
+                      await picker.getImage(source: ImageSource.gallery);
                   setState(() {
-                    imagePath = _pickedFile?.path;
+                    imagePath = pickedFile?.path;
                   });
                 },
-                child: Column(
-                  children: const <Widget>[
-                    Icon(Icons.add_a_photo),
-                    Text("Add A Photo")
-                  ],
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                  padding: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 3),
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Column(
+                    children: <Widget>[
+                      Image.network(
+                        "https://cdn-icons-png.flaticon.com/512/1339/1339270.png",
+                        width: 70,
+                        height: 70,
+                      ),
+                      const Text(
+                        "Add A Photo",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      )
+                    ],
+                  ),
                 ),
               ),
               (imagePath == null) ? Container() : Image.file(File(imagePath!)),
@@ -150,11 +192,33 @@ class _FormPostState extends State<FormPost> {
                     decoration: decorationInput("Price")),
               ),
               Container(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: TextField(
-                    controller: category,
-                    decoration: decorationInput("Category")),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white),
+                padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                child: DropdownButton(
+                  isExpanded: true,
+                  value: category,
+                  style: inputStyle,
+                  items: services.map((item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      category = value;
+                    });
+                  },
+                ),
               ),
+              //Container(
+              //  padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+              //  child: TextField(
+              //      controller: category,
+              //      decoration: decorationInput("Category")),
+              //),
               Container(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: TextField(

@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:model_house/screens/home.dart';
 import 'package:model_house/screens/interest.dart';
 import 'package:model_house/screens/place_api.dart';
+import 'package:model_house/screens/principal_view.dart';
 import 'package:model_house/screens/signup.dart';
 import 'package:model_house/services/security_service.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user.dart';
+import '../models/user.dart' as model;
+import '../provider/google_sign_in.dart';
 import '../services/notification_service.dart';
 
 class SignIn extends StatefulWidget {
@@ -21,7 +26,10 @@ class _SignInState extends State<SignIn> {
   final password = TextEditingController();
   final email = TextEditingController();
   HttpSecurity? _httpSecurity;
-  User? user;
+  model.User? user;
+  var finalUser;
+  String? message;
+  model.User? userExist;
 
   void initState() {
     _httpSecurity = HttpSecurity();
@@ -76,11 +84,25 @@ class _SignInState extends State<SignIn> {
   void showAlert(BuildContext context) {}
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: body(),
-    );
-  }
+  Widget build(BuildContext context) => Scaffold(body: body()
+      // StreamBuilder(
+      //     stream: FirebaseAuth.instance.authStateChanges(),
+      //     builder: (context, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.waiting) {
+      //         return const Center(
+      //           child: CircularProgressIndicator(),
+      //         );
+      //       } else if (snapshot.hasData) {
+      //         // return Home(user);
+      //         print("ingreso a la app");
+      //         return Container();
+      //       } else if (snapshot.hasError) {
+      //         return const Center(child: Text('Something Went Wrong!'));
+      //       } else {
+      //         return body();
+      //       }
+      //     }),
+      );
 
   Widget body() {
     return Container(
@@ -160,13 +182,65 @@ class _SignInState extends State<SignIn> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       width: MediaQuery.of(context).size.width - 10,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          final provider =
+              Provider.of<GoogleSignInProvider>(context, listen: false);
+          provider.googleLogin();
+          final userAuth = FirebaseAuth.instance.currentUser;
+          setState(() {
+            finalUser = userAuth;
+            print(userAuth);
+            print(finalUser);
+            signup(userAuth);
+          });
+          // HttpSecurity().signUp(userAuth.displayName!, userAuth.email!, "123");
+        },
         child: const Text(
           'Sign In with Google',
           style: TextStyle(fontSize: 20),
         ),
       ),
     );
+  }
+
+  Future signup(final userAuth) async {
+    if (userAuth != null) {
+      userExist = await _httpSecurity?.getEmail(userAuth.email!);
+      if (userExist == null) {
+        message = await _httpSecurity?.signUp(
+            userAuth.displayName!, userAuth.email!, "123");
+        setState(() {
+          message = message;
+        });
+        if (message == '{"message":"Registration successful"}') {
+          user = await _httpSecurity?.signIn(userAuth.email!, "123");
+          setState(() {
+            user = user;
+          });
+          login();
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return PlaceApi(user);
+              },
+            ),
+          );
+        }
+      } else {
+        user = await _httpSecurity?.signIn(userAuth.email!, "123");
+        setState(() {
+          user = user;
+        });
+        login();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) {
+              return PlaceApi(user);
+            },
+          ),
+        );
+      }
+    }
   }
 
   Container noAccount() {

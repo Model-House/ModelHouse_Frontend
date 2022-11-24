@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/provider/google_sign_in.dart';
 import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/signupchoice.dart';
 import 'package:model_house/services/notification_service.dart';
+import 'package:provider/provider.dart';
 
 class SessionOptions extends StatefulWidget {
   const SessionOptions({super.key});
@@ -64,6 +66,9 @@ class _SessionOptionsState extends State<SessionOptions> {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.logOut();
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {

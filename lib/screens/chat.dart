@@ -29,8 +29,9 @@ class _ChatState extends State<Chat> {
   }
 
   Future initialize() async {
-    messages =
-        await _httppMessage?.getMessageByUserId(widget.user!.id.toString());
+    messages = await _httppMessage?.getMessageByUserId(
+        widget.contact!.userId.toString(),
+        widget.contact!.contactId.toString());
     setState(() {
       messages = messages;
     });
@@ -40,13 +41,25 @@ class _ChatState extends State<Chat> {
     print(widget.contact!.userId);
     print(widget.contact!.contactId);
     newMessage1 = await _httppMessage?.postValueMessage(
-        content.text, "2022-11-17T04:18:07.333Z", true, widget.contact!.userId);
-    newMessage2 = await _httppMessage?.postValueMessage(content.text,
-        "2022-11-17T04:18:07.333Z", false, widget.contact!.contactId);
+        content.text,
+        "2022-11-17T04:18:07.333Z",
+        true,
+        widget.contact!.userId,
+        widget.contact!.contactId);
     setState(() {
       newMessage1 = newMessage1;
+      newMessage2 = newMessage2;
       messages?.add(newMessage1!);
     });
+  }
+
+  Future addMessage2() async {
+    newMessage2 = await _httppMessage?.postValueMessage(
+        content.text,
+        "2022-11-23T23:10:35.575Z",
+        false,
+        widget.contact!.contactId,
+        widget.contact!.userId);
   }
 
   _buildMessage(Message message) {
@@ -58,17 +71,25 @@ class _ChatState extends State<Chat> {
         decoration: BoxDecoration(
             color: message.isMe
                 ? const Color(0xFFD4493F)
-                : const Color(0xff3e4042),
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15), bottomLeft: Radius.circular(15))),
-        child: Text(message.content));
+                : const Color(0XFF30363B),
+            borderRadius: message.isMe
+                ? const BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15))
+                : const BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15))),
+        child: Text(
+          message.content,
+          style: TextStyle(color: Colors.white),
+        ));
   }
 
   _buildMessageCompose() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       height: 70,
-      color: Colors.white,
+      color: Color(0XFF30363B),
       child: Row(
         children: <Widget>[
           IconButton(
@@ -81,11 +102,14 @@ class _ChatState extends State<Chat> {
               child: TextField(
             textCapitalization: TextCapitalization.sentences,
             controller: content,
-            decoration: const InputDecoration(hintText: 'Send a message...'),
+            decoration: const InputDecoration(
+                hintText: 'Send a message...',
+                hintStyle: TextStyle(color: Colors.white)),
           )),
           IconButton(
             onPressed: () {
               addMessage();
+              addMessage2();
               setState(() {
                 content.text = "";
               });
@@ -102,15 +126,17 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text(widget.contact!.user.username),
+        backgroundColor: Color(0XFFE43848),
       ),
       body: Column(
         children: <Widget>[
           Expanded(
               child: Container(
                   decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: Color(0XFF1C1C1C),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30))),
@@ -119,7 +145,7 @@ class _ChatState extends State<Chat> {
                         topLeft: Radius.circular(30),
                         topRight: Radius.circular(30)),
                     child: ListView.builder(
-                      reverse: true,
+                      //reverse: true,
                       padding: const EdgeInsets.only(top: 15),
                       itemCount: messages == null ? 0 : messages?.length,
                       itemBuilder: ((context, index) {

@@ -34,11 +34,13 @@ class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text("Messages"),
+        backgroundColor: Color(0XFFE43848),
       ),
       body: Padding(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: ListView.builder(
             itemCount: contacts == null ? 0 : contacts?.length,
             itemBuilder: ((context, index) {
@@ -48,19 +50,31 @@ class _MessageState extends State<Message> {
                       builder: (context) =>
                           Chat(contacts?[index], widget.user)));
                 },
-                child: Card(
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Color(0XFF30363B),
+                  ),
                   child: ListTile(
                     leading: contacts![index].user.image == "image"
                         ? const Icon(
                             Icons.account_circle,
-                            color: Colors.red,
+                            color: Color(0XFFE43848),
                             size: 60.0,
                           )
                         : Image(
                             image: NetworkImage(contacts![index].user.image),
                           ),
-                    title: Text(contacts![index].user.username),
-                    subtitle: Text(contacts![index].user.phone),
+                    title: Text(
+                      contacts![index].user.username,
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    subtitle: Text(
+                      contacts![index].user.phone,
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
                   ),
                 ),
               );

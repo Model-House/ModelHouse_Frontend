@@ -147,7 +147,7 @@ class _PostViewState extends State<PostView> {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           title: const Text("View Post"),
-          backgroundColor: const Color(0xff007AFF),
+          backgroundColor: const Color(0XFFE43848),
         ),
         body: Container(
             padding: const EdgeInsets.all(15),
@@ -162,17 +162,21 @@ class _PostViewState extends State<PostView> {
                 height: 5,
               ),
               Text(widget.post!.location,
-                  style: const TextStyle(color: Colors.white, fontSize: 30)),
+                  style: const TextStyle(color: Colors.white, fontSize: 25)),
               const SizedBox(
                 height: 5,
               ),
               const Text(
                 "Description: ",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: TextStyle(color: Colors.white, fontSize: 28),
               ),
-              Text(
-                widget.post!.userId.toString(),
-                style: const TextStyle(color: Color(0XFFD9D9D9)),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Text(
+                  widget.post!.description.toString(),
+                  style:
+                      const TextStyle(color: Color(0XFFD9D9D9), fontSize: 18),
+                ),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(0, 25, 0, 15),
@@ -196,7 +200,7 @@ class _PostViewState extends State<PostView> {
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 25, 0, 0),
                 decoration: BoxDecoration(
-                    color: const Color(0xff007AFF),
+                    color: const Color(0XFFE43848),
                     borderRadius: BorderRadius.circular(15)),
                 width: MediaQuery.of(context).size.width - 100,
                 height: 50,

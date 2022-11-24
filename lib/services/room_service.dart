@@ -7,9 +7,8 @@ class RoomService {
   String url = 'https://model-house.azurewebsites.net/api/v1/';
   var client = http.Client();
 
-  // ignore: body_might_complete_normally_nullable
-  Future<List<Room>?> getPosts() async {
-    var uri = Uri.parse('${url}rooms');
+  Future<List<Room>?> getPostsByUserId(int id) async {
+    var uri = Uri.parse('${url}rooms/user/$id');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -17,8 +16,28 @@ class RoomService {
     }
   }
 
-  Future<Room> updatePosts(int id, bool check) async {
-    final response = await http.put(
+  Future<Room?> postPosts(String name, bool check, int userId) async {
+    var response = await http.post(
+      Uri.parse('${url}rooms'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        "Accept": "application/json",
+      },
+      body: jsonEncode({
+        'name': name,
+        'check': check,
+        'userId': userId,
+      }),
+    );
+    if (response.statusCode == 200) {
+      return Room.fromJson(jsonDecode(response.body));
+    } else {
+      print(response.body);
+    }
+  }
+
+  Future<Room?> updatePosts(int id, bool check, int userId) async {
+    var response = await http.put(
       Uri.parse('${url}rooms/${id + 1}'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -26,17 +45,18 @@ class RoomService {
       },
       body: jsonEncode({
         'check': check,
+        'userId': userId,
       }),
     );
-
+    print(check);
+    print(userId);
+    print(response.body);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
       return Room.fromJson(jsonDecode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to update room.');
+      print(response.body);
     }
   }
 }

@@ -80,7 +80,7 @@ class _AreaOptionsState extends State<AreaOptions> {
                   AreaService()
                       .updatePosts(index, posts![index].check, widget.user!.id);
                 });
-                // debugPrint('${posts![index].check}');
+                debugPrint('${posts![index].check}');
               },
               child: SizedBox(
                 width: 200,
