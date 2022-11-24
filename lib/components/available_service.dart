@@ -49,33 +49,35 @@ class AvailableService extends StatelessWidget {
                 color: Color(0xffE43848),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    post?.title == null ? '' : post!.title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'poppins-medium',
-                        fontSize: 17),
-                  ),
-                  Text(
-                    post?.description == null ? '' : post!.description,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'poppins-ligth',
-                        fontSize: 15),
-                  ),
-                  Text(
-                    post?.category == null ? '' : post!.category,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'poppins-regular',
-                        fontSize: 10.0),
-                  )
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      post?.title == null ? '' : post!.title,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'poppins-medium',
+                          fontSize: 17),
+                    ),
+                    Text(
+                      post?.description == null ? '' : post!.description,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'poppins-ligth',
+                          fontSize: 15),
+                    ),
+                    Text(
+                      post?.category == null ? '' : post!.category,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'poppins-regular',
+                          fontSize: 10.0),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(

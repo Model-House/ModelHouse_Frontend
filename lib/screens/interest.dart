@@ -50,8 +50,8 @@ class Interest extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             AreaPage(user),
-            const RoomPage(),
-            const ServicePage(),
+            RoomPage(user),
+            ServicePage(user),
             next(context, user, 'PrincipalView')
           ],
         ),
@@ -117,7 +117,8 @@ class AreaPage extends StatelessWidget {
 }
 
 class RoomPage extends StatelessWidget {
-  const RoomPage({super.key});
+  final User? user;
+  const RoomPage(this.user, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +138,7 @@ class RoomPage extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return const RoomOptionPage();
+                  return RoomOptionPage(user);
                 },
               ),
             );
@@ -172,7 +173,8 @@ class RoomPage extends StatelessWidget {
 }
 
 class ServicePage extends StatelessWidget {
-  const ServicePage({super.key});
+  final User? user;
+  const ServicePage(this.user, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +194,7 @@ class ServicePage extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
-                  return const ServiceOptionPage();
+                  return ServiceOptionPage(user);
                 },
               ),
             );

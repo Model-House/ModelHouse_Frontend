@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:model_house/provider/google_sign_in.dart';
 import 'package:model_house/screens/editProfile.dart';
 import 'package:model_house/screens/formPost.dart';
 import 'package:model_house/screens/list_orders.dart';
 import 'package:model_house/screens/signin.dart';
 import 'package:model_house/screens/yourPost.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
@@ -281,45 +283,47 @@ class _MenuState extends State<Menu> {
             ),
           );
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color: const Color(0XFF161A1D),
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(color: const Color(0xffE0E1DD), width: 3.5)),
-          child: Row(
-            children: <Widget>[
-              widget.user!.image == "image"
-                  ? const Padding(
-                      padding: EdgeInsets.all(15.0),
-                      child: Icon(
-                        Icons.account_circle,
-                        color: Colors.white,
-                        size: 60.0,
-                      ))
-                  : Image.network(widget.user!.image, width: 60, height: 60),
-              Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        widget.user?.username == null
-                            ? ''
-                            : widget.user!.username,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'archivo',
-                            fontSize: 18.0),
-                      ),
-                      Text(
-                        widget.user?.email == null ? '' : widget.user!.email,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'archivo',
-                            fontSize: 16.0),
-                      )
-                    ],
-                  ))
-            ],
+        child: Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+                color: const Color(0XFF161A1D),
+                borderRadius: BorderRadius.circular(15.0),
+                border: Border.all(color: const Color(0xffE0E1DD), width: 3.5)),
+            child: Row(
+              children: <Widget>[
+                widget.user!.image == "image"
+                    ? const Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                          size: 60.0,
+                        ))
+                    : Image.network(widget.user!.image, width: 60, height: 60),
+                Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          widget.user?.username == null
+                              ? ''
+                              : widget.user!.username,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'archivo',
+                              fontSize: 18.0),
+                        ),
+                        Text(
+                          widget.user?.email == null ? '' : widget.user!.email,
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'archivo',
+                              fontSize: 16.0),
+                        )
+                      ],
+                    ))
+              ],
+            ),
           ),
         ));
   }
@@ -337,6 +341,9 @@ class _MenuState extends State<Menu> {
         child: MaterialButton(
           onPressed: () {
             logOut();
+            final provider =
+                Provider.of<GoogleSignInProvider>(context, listen: false);
+            provider.logOut();
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (BuildContext context) {
