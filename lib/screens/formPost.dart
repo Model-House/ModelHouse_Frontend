@@ -102,7 +102,6 @@ class _FormPostState extends State<FormPost> {
                         Navigator.pop(context);
                         title.text = "";
                         price.text = "";
-                        category = "";
                         location.text = "";
                         description.text = "";
                       },
@@ -123,7 +122,6 @@ class _FormPostState extends State<FormPost> {
                         Navigator.pop(context);
                         title.text = "";
                         price.text = "";
-                        category = "";
                         location.text = "";
                         description.text = "";
                       },

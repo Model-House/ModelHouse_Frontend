@@ -29,8 +29,9 @@ class _ChatState extends State<Chat> {
   }
 
   Future initialize() async {
-    messages =
-        await _httppMessage?.getMessageByUserId(widget.user!.id.toString());
+    messages = await _httppMessage?.getMessageByUserId(
+        widget.contact!.userId.toString(),
+        widget.contact!.contactId.toString());
     setState(() {
       messages = messages;
     });
@@ -40,13 +41,25 @@ class _ChatState extends State<Chat> {
     print(widget.contact!.userId);
     print(widget.contact!.contactId);
     newMessage1 = await _httppMessage?.postValueMessage(
-        content.text, "2022-11-17T04:18:07.333Z", true, widget.contact!.userId);
-    newMessage2 = await _httppMessage?.postValueMessage(content.text,
-        "2022-11-17T04:18:07.333Z", false, widget.contact!.contactId);
+        content.text,
+        "2022-11-17T04:18:07.333Z",
+        true,
+        widget.contact!.userId,
+        widget.contact!.contactId);
     setState(() {
       newMessage1 = newMessage1;
+      newMessage2 = newMessage2;
       messages?.add(newMessage1!);
     });
+  }
+
+  Future addMessage2() async {
+    newMessage2 = await _httppMessage?.postValueMessage(
+        content.text,
+        "2022-11-23T23:10:35.575Z",
+        false,
+        widget.contact!.contactId,
+        widget.contact!.userId);
   }
 
   _buildMessage(Message message) {
@@ -96,6 +109,7 @@ class _ChatState extends State<Chat> {
           IconButton(
             onPressed: () {
               addMessage();
+              addMessage2();
               setState(() {
                 content.text = "";
               });
